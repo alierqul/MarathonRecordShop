@@ -33,7 +33,7 @@ public class SingerEntity implements Serializable {
   @Column(name = "singer_bio")
   private String bio;
 
-  @OneToMany(mappedBy = "singer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "singer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private List<AlbumEntity> albums = new ArrayList<AlbumEntity>();
 
   @Temporal(value = TemporalType.TIMESTAMP)
@@ -70,7 +70,7 @@ public class SingerEntity implements Serializable {
   @Override
   public String toString() {
     return "SingerEntity [id=" + id + ", name=" + name + ", surname=" + surname + ", bio=" + bio
-        + ", albums=" + albums + ", createDate=" + createDate + "]";
+        + ", createDate=" + createDate.toString() + "]";
   }
 
 

@@ -1,5 +1,7 @@
 package com.aliergul.testmain;
 
+import java.util.List;
+import java.util.Scanner;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import com.aliergul.controller.album.AlbumController;
@@ -12,12 +14,60 @@ import com.aliergul.entity.UserEntity;
 public class TestMainCreateUserAndLogin {
   private static final String TAG = "TestMainCreateUserAndLogin";
   private static final Logger logger = LogManager.getLogger(TestMainCreateUserAndLogin.class);
+  private static Scanner scan = new Scanner(System.in);
 
   public static void main(String[] args) {
 
     test_01_loginAndRegister();
     test_02_addNewAlbum();
+    test_03_listByUserQuery();
 
+    scan.close();
+  }
+
+  private static void test_03_listByUserQuery() {
+    List<AlbumEntity> list = null;
+    System.out.println("**********************************");
+    System.out.println("**********************************");
+    System.out.println("**********************************");
+    AlbumController albumController = new AlbumController();
+    SingerController singerController = new SingerController();
+    list = albumController.listedBySalesCount();
+    System.out.println("**********************************");
+    System.out.println("");
+    System.out.println("listedBySalesCount / ");
+    // list.forEach(System.out::println);
+    System.out.println("");
+    System.out.println("**********************************");
+    System.out.println("**********************************");
+    list = albumController.listedBySinger(singerController.find(3));
+    System.out.println("");
+    System.out.println("listedBySinger / ");
+    // list.forEach(System.out::println);
+    System.out.println("");
+    System.out.println("**********************************");
+    System.out.println("**********************************");
+    list = albumController.listedByType("pop");
+    System.out.println("");
+    System.out.println("listedByType / ");
+    // list.forEach(System.out::println);
+    System.out.println("");
+    System.out.println("**********************************");
+    System.out.println("**********************************");
+    list = albumController.listTheDiscountedFifteenAlbum();
+    System.out.println("");
+    System.out.println("listTheDiscountedFifteenAlbum / ");
+    // list.forEach(System.out::println);
+    System.out.println("");
+    System.out.println("**********************************");
+    System.out.println("**********************************");
+    // list = albumController.listTheLastTenAlbum();
+    System.out.println("");
+    System.out.println("listTheLastTenAlbum / ");
+    // list.forEach(System.out::println);
+    System.out.println("");
+    System.out.println("**********************************");
+    System.out.println("**********************************");
   }
 
   private static void test_02_addNewAlbum() {
@@ -26,6 +76,7 @@ public class TestMainCreateUserAndLogin {
     // String name, double pierce, long stockCount
     AlbumEntity a1 = new AlbumEntity("Sevmemeliz", 29.90, 50);
     AlbumEntity a2 = new AlbumEntity("insan gelir insan geçer", 29.90, 50);
+    a2.setDiscountRate(10);
     AlbumEntity a3 = new AlbumEntity("Yerine Sevemem", 19.90, 50);
     // String name, String surname, String bio
     SingerEntity s1 = new SingerEntity("Sena", "Şener", "kadın - yaşıyor");

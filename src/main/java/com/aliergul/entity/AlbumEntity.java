@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,29 +31,29 @@ public class AlbumEntity implements Serializable {
   @Column(name = "album_id")
   private long id;
   @Column(name = "album_name")
-  private String name;
+  private String name = "";
   @Column(name = "album_pierce")
-  private double pierce;
+  private double pierce = 0.0;
 
   @Lob
   @Column(name = "album_imgAlbum")
   private byte[] imgAlbum;
 
   @Column(name = "album_discountRate")
-  private double discountRate;
+  private double discountRate = 0.0;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "singer_id")
   private SingerEntity singer;
 
   @Column(name = "album_type")
-  private String type;
+  private String type = "";
   @Column(name = "album_status")
-  private String status;
+  private String status = "";
   @Column(name = "album_stockCount")
-  private long stockCount;
+  private long stockCount = 0;
   @Column(name = "album_salesCount")
-  private long salesCount;
+  private long salesCount = 0;
 
   @Temporal(value = TemporalType.TIMESTAMP)
   @CreationTimestamp
@@ -91,10 +90,10 @@ public class AlbumEntity implements Serializable {
 
   @Override
   public String toString() {
-    return "AlbumEntity [id=" + id + ", name=" + name + ", pierce=" + pierce + ", imgAlbum="
-        + Arrays.toString(imgAlbum) + ", discountRate=" + discountRate + ", singer=" + singer
-        + ", type=" + type + ", status=" + status + ", stockCount=" + stockCount + ", salesCount="
-        + salesCount + ", createDate=" + createDate + "]";
+    return "AlbumEntity [id=" + id + ", name=" + name + ", pierce=" + pierce + ", discountRate="
+        + discountRate + ", singer=" + ((singer != null) ? singer.toString() : "") + ", type="
+        + type + ", status=" + status + ", stockCount=" + stockCount + ", salesCount=" + salesCount
+        + ", createDate=" + createDate.toString() + "]";
   }
 
   public long getId() {
