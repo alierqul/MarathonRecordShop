@@ -1,16 +1,17 @@
 package com.aliergul.controller.album;
 
 import java.util.List;
-import java.util.Optional;
 import org.hibernate.Session;
 import com.aliergul.entity.AlbumEntity;
 import com.aliergul.entity.SingerEntity;
 import com.aliergul.util.HibernateUtils;
 
 public interface IAlbumControlable {
-  public Optional<AlbumEntity> create(AlbumEntity album);
+  public boolean create(AlbumEntity album);
 
   public boolean delete(AlbumEntity album);
+
+  public boolean update(AlbumEntity album);
 
   public List<AlbumEntity> list();
 

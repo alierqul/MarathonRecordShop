@@ -4,7 +4,12 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,6 +61,8 @@ public class AlbumEntity implements Serializable {
   @Column(name = "album_salesCount")
   private long salesCount = 0;
 
+  @OneToMany(mappedBy = "album", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  private List<OrderEntity> orders = new ArrayList<OrderEntity>();
   @Temporal(value = TemporalType.TIMESTAMP)
   @CreationTimestamp
   @Column(name = "album_createDate")
@@ -96,6 +104,36 @@ public class AlbumEntity implements Serializable {
         + ", createDate=" + createDate.toString() + "]";
   }
 
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + Arrays.hashCode(imgAlbum);
+    result = prime * result + Objects.hash(createDate, discountRate, id, name, orders, pierce,
+        salesCount, singer, status, stockCount, type);
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    AlbumEntity other = (AlbumEntity) obj;
+    return Objects.equals(createDate, other.createDate)
+        && Double.doubleToLongBits(discountRate) == Double.doubleToLongBits(other.discountRate)
+        && id == other.id && Arrays.equals(imgAlbum, other.imgAlbum)
+        && Objects.equals(name, other.name) && Objects.equals(orders, other.orders)
+        && Double.doubleToLongBits(pierce) == Double.doubleToLongBits(other.pierce)
+        && salesCount == other.salesCount && Objects.equals(singer, other.singer)
+        && Objects.equals(status, other.status) && stockCount == other.stockCount
+        && Objects.equals(type, other.type);
+  }
+
   public long getId() {
     return id;
   }
@@ -127,6 +165,10 @@ public class AlbumEntity implements Serializable {
   public void setImgAlbum(String path) throws IOException {
 
     this.imgAlbum = Files.readAllBytes(Paths.get(path));
+  }
+
+  public void setImgAlbum(byte[] imgAlbum) {
+    this.imgAlbum = imgAlbum;
   }
 
   public double getDiscountRate() {

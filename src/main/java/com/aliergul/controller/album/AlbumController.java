@@ -2,7 +2,6 @@ package com.aliergul.controller.album;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import javax.persistence.TypedQuery;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -16,26 +15,20 @@ public class AlbumController implements IAlbumControlable {
   private static final String TAG = "AlbumController-";
 
   @Override
-  public Optional<AlbumEntity> create(AlbumEntity album) {
+  public boolean create(AlbumEntity album) {
     try {
       Session session = databaseConnectionHibernate();
       session.getTransaction().begin();
 
       session.persist(album);
       session.getTransaction().commit();
-
-
-      long lastID =
-          ((Number) session.createNativeQuery("select max(album.id) from AlbumEntity as album")
-              .getSingleResult()).longValue();
-      Optional<AlbumEntity> optUser = Optional.of(find(lastID));
-      logger.info(TAG + "/ onCreate / isSuccesful \n" + optUser.toString());
-      return optUser;
+      logger.info(TAG + "/ onCreate / isSuccesful \n" + album.toString());
+      return true;
     } catch (Exception e) {
       logger.error(TAG + "/ onCreate / ERROR:\n" + album.toString() + "\n" + e.getMessage());
 
     }
-    return null;
+    return false;
   }
 
   @Override
@@ -68,8 +61,6 @@ public class AlbumController implements IAlbumControlable {
       if (entity != null) {
         logger.info(TAG + "/ onFinded / isSuccesful \n" + entity.toString());
         return entity;
-      } else {
-        return null;
       }
     } catch (Exception e) {
 
@@ -149,6 +140,38 @@ public class AlbumController implements IAlbumControlable {
     ArrayList<AlbumEntity> arrayList = (ArrayList<AlbumEntity>) typedQuery.getResultList();
 
     return arrayList;
+  }
+
+  @Override
+  public boolean update(AlbumEntity album) {
+    try {
+      AlbumEntity findEntity = find(album.getId());
+      if (findEntity != null) {
+
+        findEntity.setDiscountRate(album.getDiscountRate());
+        findEntity.setImgAlbum(album.getImgAlbum());
+        findEntity.setName(album.getName());
+        findEntity.setPierce(album.getPierce());
+        findEntity.setSalesCount(album.getSalesCount());
+        findEntity.setSinger(album.getSinger());
+        findEntity.setStatus(album.getStatus());
+        findEntity.setStockCount(album.getStockCount());
+        findEntity.setType(album.getType());
+        Session session = databaseConnectionHibernate();
+        session.getTransaction().begin();
+        session.merge(findEntity);
+        session.getTransaction().commit();
+
+        logger.info(TAG + "/ onUpdate / isSuccesful \n" + findEntity.toString());
+        return true;
+      }
+
+    } catch (Exception e) {
+      logger.error(TAG + "/ onUpdate / ERROR:\n" + album.toString() + "\n" + e.getMessage());
+      e.printStackTrace();
+    }
+
+    return false;
   }
 
 

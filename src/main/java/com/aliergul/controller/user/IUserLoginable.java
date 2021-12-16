@@ -9,7 +9,7 @@ import com.aliergul.util.HibernateUtils;
 public interface IUserLoginable {
   public Optional<UserEntity> onLogin(UserEntity user);
 
-  public Optional<UserEntity> onRegister(UserEntity user);
+  public boolean onRegister(UserEntity user);
 
   public UserEntity find(long id);
 

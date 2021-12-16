@@ -1,12 +1,18 @@
 package com.aliergul.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,7 +41,8 @@ public class UserEntity implements Serializable {
   private String address;
   @Column(name = "user_status")
   private String status;
-
+  @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  private List<OrderEntity> orders = new ArrayList();
   @Temporal(value = TemporalType.TIMESTAMP)
   @CreationTimestamp
   @Column(name = "user_createDate", nullable = false)
@@ -80,6 +87,42 @@ public class UserEntity implements Serializable {
         + ", passsword=" + password + ", phone=" + phone + ", address=" + address + ", status="
         + status + ", createDate=" + createDate + "]";
   }
+
+
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(address, createDate, email, id, name, orders, password, phone, status,
+        surname);
+  }
+
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    UserEntity other = (UserEntity) obj;
+    return Objects.equals(address, other.address) && Objects.equals(createDate, other.createDate)
+        && Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
+        && Objects.equals(orders, other.orders) && Objects.equals(password, other.password)
+        && Objects.equals(phone, other.phone) && Objects.equals(status, other.status)
+        && Objects.equals(surname, other.surname);
+  }
+
+
+  public List<OrderEntity> getOrders() {
+    return orders;
+  }
+
+
+  public void setOrders(List<OrderEntity> orders) {
+    this.orders = orders;
+  }
+
 
   public long getId() {
     return id;

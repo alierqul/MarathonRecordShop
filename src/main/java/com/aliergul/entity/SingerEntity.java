@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +34,7 @@ public class SingerEntity implements Serializable {
   @Column(name = "singer_bio")
   private String bio;
 
-  @OneToMany(mappedBy = "singer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "singer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<AlbumEntity> albums = new ArrayList<AlbumEntity>();
 
   @Temporal(value = TemporalType.TIMESTAMP)
@@ -70,7 +71,28 @@ public class SingerEntity implements Serializable {
   @Override
   public String toString() {
     return "SingerEntity [id=" + id + ", name=" + name + ", surname=" + surname + ", bio=" + bio
-        + ", createDate=" + createDate.toString() + "]";
+        + "]";
+  }
+
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(albums, bio, createDate, id, name, surname);
+  }
+
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    SingerEntity other = (SingerEntity) obj;
+    return Objects.equals(albums, other.albums) && Objects.equals(bio, other.bio)
+        && Objects.equals(createDate, other.createDate) && id == other.id
+        && Objects.equals(name, other.name) && Objects.equals(surname, other.surname);
   }
 
 

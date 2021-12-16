@@ -34,27 +34,21 @@ public class UserControllerImpl implements IUserLoginable {
   }
 
   @Override
-  public Optional<UserEntity> onRegister(UserEntity user) {
+  public boolean onRegister(UserEntity user) {
     try {
       Session session = databaseConnectionHibernate();
       session.getTransaction().begin();
-
       session.persist(user);
       session.getTransaction().commit();
 
-
-      long lastID =
-          ((Number) session.createNativeQuery("select max(id) from UserEntity;").getSingleResult())
-              .longValue();
-      Optional<UserEntity> optUser = Optional.of(find(lastID));
       sendActivasyonMail(user.getEmail());
-      logger.info(TAG + "/ onRegister / isSuccesful \n" + optUser.toString());
-      return optUser;
+      logger.info(TAG + "/ onRegister / isSuccesful \n" + user.toString());
+      return true;
     } catch (Exception e) {
       logger.error(TAG + "/ onRegister / ERROR:\n" + user.toString() + "\n" + e.getMessage());
 
     }
-    return null;
+    return false;
   }
 
   @Override
