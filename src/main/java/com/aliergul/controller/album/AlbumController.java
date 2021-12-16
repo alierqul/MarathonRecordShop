@@ -81,7 +81,7 @@ public class AlbumController implements IAlbumControlable {
   public List<AlbumEntity> list() {
     Session session = databaseConnectionHibernate();
 
-    String hql = "select str from MovieEntity as str where str.movieid>=:startCount";
+    String hql = "select str from AlbumEntity as str where str.movieid>=:startCount";
     TypedQuery<AlbumEntity> typedQuery = session.createQuery(hql, AlbumEntity.class);
     typedQuery.setParameter("startCount", 1L);
 
@@ -92,32 +92,63 @@ public class AlbumController implements IAlbumControlable {
 
   @Override
   public List<AlbumEntity> listTheLastTenAlbum() {
-    // TODO Auto-generated method stub
-    return null;
+    Session session = databaseConnectionHibernate();
+
+    String hql = "select str from AlbumEntity as str  order by str.createDate desc";
+    TypedQuery<AlbumEntity> typedQuery = session.createQuery(hql, AlbumEntity.class);
+    typedQuery.setMaxResults(10);
+    ArrayList<AlbumEntity> arrayList = (ArrayList<AlbumEntity>) typedQuery.getResultList();
+
+    return arrayList;
   }
 
   @Override
   public List<AlbumEntity> listTheDiscountedFifteenAlbum() {
-    // TODO Auto-generated method stub
-    return null;
+    Session session = databaseConnectionHibernate();
+
+    String hql =
+        "select str from AlbumEntity as str where str.discountRate>0 order by str.discountRate desc";
+    TypedQuery<AlbumEntity> typedQuery = session.createQuery(hql, AlbumEntity.class);
+    typedQuery.setMaxResults(15);
+    ArrayList<AlbumEntity> arrayList = (ArrayList<AlbumEntity>) typedQuery.getResultList();
+
+    return arrayList;
   }
 
   @Override
   public List<AlbumEntity> listedByType(String tag) {
-    // TODO Auto-generated method stub
-    return null;
+    Session session = databaseConnectionHibernate();
+
+    String hql =
+        "select str from AlbumEntity as str where str.type like(lower(:tag)) order by str.createDate desc";
+    TypedQuery<AlbumEntity> typedQuery = session.createQuery(hql, AlbumEntity.class);
+    typedQuery.setParameter("tag", "%" + tag + "%");
+    ArrayList<AlbumEntity> arrayList = (ArrayList<AlbumEntity>) typedQuery.getResultList();
+
+    return arrayList;
   }
 
   @Override
   public List<AlbumEntity> listedBySinger(SingerEntity singer) {
-    // TODO Auto-generated method stub
-    return null;
+    Session session = databaseConnectionHibernate();
+
+    String hql = "select str from AlbumEntity as str where str.singer=:tag";
+    TypedQuery<AlbumEntity> typedQuery = session.createQuery(hql, AlbumEntity.class);
+    typedQuery.setParameter("tag", singer);
+    ArrayList<AlbumEntity> arrayList = (ArrayList<AlbumEntity>) typedQuery.getResultList();
+
+    return arrayList;
   }
 
   @Override
   public List<AlbumEntity> listedBySalesCount() {
-    // TODO Auto-generated method stub
-    return null;
+    Session session = databaseConnectionHibernate();
+
+    String hql = "select str from AlbumEntity as str order by str.salesCount desc";
+    TypedQuery<AlbumEntity> typedQuery = session.createQuery(hql, AlbumEntity.class);
+    ArrayList<AlbumEntity> arrayList = (ArrayList<AlbumEntity>) typedQuery.getResultList();
+
+    return arrayList;
   }
 
 
