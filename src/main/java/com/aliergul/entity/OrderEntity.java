@@ -34,8 +34,10 @@ public class OrderEntity implements Serializable {
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id")
   private UserEntity user;
+
   @Column(name = "order_count")
   private long count;
+
   @Column(name = "order_total_pierce")
   private double sumPierce;
 

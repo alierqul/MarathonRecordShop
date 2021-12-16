@@ -12,6 +12,8 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +26,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
+import com.aliergul.util.EStatus;
+import com.aliergul.util.EType;
 
 @Entity
 @Table(name = "tbl_albums")
@@ -51,11 +55,12 @@ public class AlbumEntity implements Serializable {
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "singer_id")
   private SingerEntity singer;
-
+  @Enumerated(EnumType.STRING)
   @Column(name = "album_type")
-  private String type = "";
+  private EType type = EType.POP;
+  @Enumerated(EnumType.STRING)
   @Column(name = "album_status")
-  private String status = "";
+  private EStatus status = EStatus.ACTIVE;
   @Column(name = "album_stockCount")
   private long stockCount = 0;
   @Column(name = "album_salesCount")
@@ -72,9 +77,11 @@ public class AlbumEntity implements Serializable {
 
   }
 
+
+
   public AlbumEntity(long id, String name, double pierce, byte[] imgAlbum, double discountRate,
-      SingerEntity singer, String type, String status, long stockCount, long salesCount,
-      Date createDate) {
+      SingerEntity singer, EType type, EStatus status, long stockCount, long salesCount,
+      List<OrderEntity> orders, Date createDate) {
     super();
     this.id = id;
     this.name = name;
@@ -86,8 +93,11 @@ public class AlbumEntity implements Serializable {
     this.status = status;
     this.stockCount = stockCount;
     this.salesCount = salesCount;
+    this.orders = orders;
     this.createDate = createDate;
   }
+
+
 
   public AlbumEntity(String name, double pierce, long stockCount) {
     super();
@@ -187,19 +197,19 @@ public class AlbumEntity implements Serializable {
     this.singer = singer;
   }
 
-  public String getType() {
+  public EType getType() {
     return type;
   }
 
-  public void setType(String type) {
+  public void setType(EType type) {
     this.type = type;
   }
 
-  public String getStatus() {
+  public EStatus getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(EStatus status) {
     this.status = status;
   }
 
