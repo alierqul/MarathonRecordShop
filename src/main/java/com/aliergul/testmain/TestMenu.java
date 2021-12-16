@@ -10,6 +10,7 @@ import com.aliergul.entity.AlbumEntity;
 import com.aliergul.entity.OrderEntity;
 import com.aliergul.entity.SingerEntity;
 import com.aliergul.entity.UserEntity;
+import com.aliergul.util.ExceptionLowStockCount;
 import com.aliergul.util.MenuBuilder;
 
 public enum TestMenu {
@@ -40,9 +41,16 @@ public enum TestMenu {
     logger.info(TAG + " -AlbumEntity=  -  " + album);
     UserEntity user = uController.find(1L);
     logger.info(TAG + " - UserEntity -  " + user);
-    OrderEntity o1 = new OrderEntity(album, user, 2L);
+    OrderEntity o1 = null;
+    try {
+      o1 = new OrderEntity(album, user, 2L);
+      orderController.create(o1);
+    } catch (ExceptionLowStockCount e) {
+      logger.info(TAG + " - OrderBy  -  " + album + e.getMessage());
+      e.printStackTrace();
+    }
 
-    orderController.create(o1);
+
 
   }
 

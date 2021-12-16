@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
+import com.aliergul.util.EStatus;
+import com.aliergul.util.ExceptionLowStockCount;
 
 @Entity
 @Table(name = "tbl_orders")
@@ -61,12 +63,15 @@ public class OrderEntity implements Serializable {
     this.createDate = createDate;
   }
 
-  public OrderEntity(AlbumEntity album, UserEntity user, long count) {
+  public OrderEntity(AlbumEntity album, UserEntity user, long count) throws ExceptionLowStockCount {
 
     this.album = album;
     this.user = user;
     this.count = count;
     this.sumPierce = count * album.getPierce();
+    if (album.getStatus() != EStatus.ACTIVE) {
+      throw new ExceptionLowStockCount("Satış Yapılamaz");
+    }
   }
 
 
