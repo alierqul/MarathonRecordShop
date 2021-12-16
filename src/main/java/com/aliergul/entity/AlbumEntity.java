@@ -1,6 +1,9 @@
 package com.aliergul.entity;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Date;
 import javax.persistence.Column;
@@ -32,9 +35,11 @@ public class AlbumEntity implements Serializable {
   private String name;
   @Column(name = "album_pierce")
   private double pierce;
+
   @Lob
   @Column(name = "album_imgAlbum")
   private byte[] imgAlbum;
+
   @Column(name = "album_discountRate")
   private double discountRate;
 
@@ -120,8 +125,9 @@ public class AlbumEntity implements Serializable {
     return imgAlbum;
   }
 
-  public void setImgAlbum(byte[] imgAlbum) {
-    this.imgAlbum = imgAlbum;
+  public void setImgAlbum(String path) throws IOException {
+
+    this.imgAlbum = Files.readAllBytes(Paths.get(path));
   }
 
   public double getDiscountRate() {
