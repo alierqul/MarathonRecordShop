@@ -28,7 +28,7 @@
          <children>
             <AnchorPane layoutX="278.0" layoutY="141.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFD24D;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
                <children>
-                  <TabPane blendMode="SCREEN" prefWidth="400.0" style="-fx-background-color: #FFD24D;" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane blendMode="SCREEN" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #FFD24D;" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab text="Giriş Yap">
                         <content>
@@ -94,9 +94,9 @@
                       </Tab>
                       <Tab text="Kayıt Ol">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="200.0">
                                  <children>
-                                    <GridPane>
+                                    <GridPane minHeight="250.0">
                                       <columnConstraints>
                                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="42.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.0" minWidth="10.0" prefWidth="117.0" />
@@ -106,18 +106,19 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label text="Email" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                          <Label text="Email" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                              <font>
                                                 <Font name="Elephant" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Şifre" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                          <Label text="Şifre" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                              <font>
                                                 <Font name="Elephant" size="18.0" />
                                              </font>
@@ -127,38 +128,49 @@
                                                 <Font name="Elephant" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Şifre Tekrar" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                          <Label text="Şifre Tekrar" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                              <font>
                                                 <Font name="Elephant" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="register_btn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onClickBtnRegister" style="-fx-background-radius: 20;" text="Kayıt Ol" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                          <Button fx:id="register_btn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onClickBtnRegister" style="-fx-background-radius: 20;" text="Kayıt Ol" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="7">
                                              <GridPane.margin>
                                                 <Insets />
                                              </GridPane.margin>
                                           </Button>
                                           <TextField fx:id="register_edt_username" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <TextField fx:id="register_edt_email" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <PasswordField fx:id="register_edt_pasword" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                          <PasswordField fx:id="register_edt_re_password" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <TextField fx:id="register_edt_email" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <PasswordField fx:id="register_edt_pasword" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <PasswordField fx:id="register_edt_re_password" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                                              <image>
                                                 <Image url="@../../../img/user.png" />
                                              </image>
                                           </ImageView>
-                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
-                                             <image>
-                                                <Image url="@../../../img/email.png" />
-                                             </image>
-                                          </ImageView>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                                              <image>
-                                                <Image url="@../../../img/password.png" />
+                                                <Image url="@../../../img/email.png" />
                                              </image>
                                           </ImageView>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                                              <image>
                                                 <Image url="@../../../img/password.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
+                                             <image>
+                                                <Image url="@../../../img/password.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label text="Soyisim" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Elephant" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="register_edt_surname" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                                             <image>
+                                                <Image url="@../../../img/user.png" />
                                              </image>
                                           </ImageView>
                                        </children>
