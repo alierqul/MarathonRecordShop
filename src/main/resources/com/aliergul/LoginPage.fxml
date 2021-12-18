@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="533.0" maxWidth="650.0" minHeight="533.0" minWidth="500.0" prefHeight="533.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aliergul.controller.fx.LoginPageController">
+   <center>
+      <AnchorPane prefHeight="513.0" prefWidth="472.0" style="-fx-background-color: #1b4145;">
+         <children>
+            <AnchorPane layoutX="278.0" layoutY="141.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFD24D;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
+               <children>
+                  <TabPane blendMode="SCREEN" prefWidth="400.0" style="-fx-background-color: #FFD24D;" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Giriş Yap">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="234.0" prefWidth="276.0">
+                                 <children>
+                                    <ImageView pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+                                       <viewport>
+                                          <Rectangle2D />
+                                       </viewport>
+                                       <effect>
+                                          <BoxBlur height="26.0" />
+                                       </effect>
+                                    </ImageView>
+                                    <GridPane alignment="TOP_CENTER" prefHeight="211.0" prefWidth="293.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="107.0" AnchorPane.topAnchor="0.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="42.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints minWidth="10.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                                             <image>
+                                                <Image url="@../../../img/email.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                                             <image>
+                                                <Image url="@../../../img/password.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label text="Email" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font name="Elephant" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Şifre" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Elephant" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="edt_user_email" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <Button fx:id="btn_login" mnemonicParsing="false" onMouseClicked="#onClickBtnLogin" style="-fx-background-radius: 20;" text="Giriş Yap" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <PasswordField fx:id="edt_user_password" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                       </children>
+                                    </GridPane>
+                                    <Label alignment="CENTER" blendMode="MULTIPLY" contentDisplay="CENTER" layoutX="3.0" prefHeight="46.0" prefWidth="398.0" text="Giriş" textAlignment="CENTER" AnchorPane.leftAnchor="3.0">
+                                       <font>
+                                          <Font name="Elephant" size="36.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Kayıt Ol">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="42.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.0" minWidth="10.0" prefWidth="117.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="141.0" minWidth="10.0" prefWidth="141.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Email" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Elephant" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Şifre" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="Elephant" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="İsim" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font name="Elephant" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Şifre Tekrar" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font name="Elephant" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="register_btn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onClickBtnRegister" style="-fx-background-radius: 20;" text="Kayıt Ol" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </Button>
+                                          <TextField fx:id="register_edt_username" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <TextField fx:id="register_edt_email" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <PasswordField fx:id="register_edt_pasword" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <PasswordField fx:id="register_edt_re_password" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                                             <image>
+                                                <Image url="@../../../img/user.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                                             <image>
+                                                <Image url="@../../../img/email.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+                                             <image>
+                                                <Image url="@../../../img/password.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+                                             <image>
+                                                <Image url="@../../../img/password.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </GridPane>
+                                    <Label alignment="CENTER" blendMode="MULTIPLY" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="400.0" text="Kayıt Ol">
+                                       <font>
+                                          <Font name="Elephant" size="36.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+               <effect>
+                  <Reflection />
+               </effect>
+            </AnchorPane>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <effect>
+            <Glow />
+         </effect>
+      </AnchorPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #1b4145;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="TOP" layoutX="29.0" layoutY="36.0" prefHeight="513.0" prefWidth="201.0" style="-fx-background-color: #FFD24D; -fx-background-radius: 25;" text="Marathon Record Shop" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Comic Sans MS" size="38.0" />
+               </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <effect>
+            <Glow />
+         </effect>
+      </AnchorPane>
+   </left>
+</BorderPane>

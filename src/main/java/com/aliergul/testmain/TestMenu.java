@@ -2,10 +2,10 @@ package com.aliergul.testmain;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import com.aliergul.controller.album.AlbumController;
-import com.aliergul.controller.order.OrderControlerImpl;
-import com.aliergul.controller.singer.SingerController;
-import com.aliergul.controller.user.UserControllerImpl;
+import com.aliergul.controller.entity.album.AlbumController;
+import com.aliergul.controller.entity.order.OrderControlerImpl;
+import com.aliergul.controller.entity.singer.SingerController;
+import com.aliergul.controller.entity.user.UserControllerImpl;
 import com.aliergul.entity.AlbumEntity;
 import com.aliergul.entity.OrderEntity;
 import com.aliergul.entity.SingerEntity;
