@@ -2,7 +2,6 @@ package com.aliergul.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,8 +14,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
-import com.aliergul.util.EStatus;
-import com.aliergul.util.ExceptionLowStockCount;
 
 @Entity
 @Table(name = "tbl_orders")
@@ -29,9 +26,9 @@ public class OrderEntity implements Serializable {
   @Column(name = "order_id", nullable = false)
   private long id;
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "album_id")
-  private AlbumEntity album;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "product_id")
+  private ProductEntity product;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id")
@@ -52,55 +49,42 @@ public class OrderEntity implements Serializable {
 
   }
 
-  public OrderEntity(long id, AlbumEntity album, UserEntity user, long count, double sumPierce,
-      Date createDate) {
 
+
+  public OrderEntity(ProductEntity product, UserEntity user, long count) {
+    super();
+    this.product = product;
+    this.user = user;
+    this.count = count;
+
+  }
+
+
+
+  public OrderEntity(long id, ProductEntity product, UserEntity user, long count, double sumPierce,
+      Date createDate) {
+    super();
     this.id = id;
-    this.album = album;
+    this.product = product;
     this.user = user;
     this.count = count;
     this.sumPierce = sumPierce;
     this.createDate = createDate;
   }
 
-  public OrderEntity(AlbumEntity album, UserEntity user, long count) throws ExceptionLowStockCount {
 
-    this.album = album;
-    this.user = user;
-    this.count = count;
-    this.sumPierce = count * album.getPierce();
-    if (album.getStatus() != EStatus.ACTIVE) {
-      throw new ExceptionLowStockCount("Satış Yapılamaz");
-    }
+
+  public ProductEntity getProduct() {
+    return product;
   }
 
 
 
-  @Override
-  public String toString() {
-    return "OrderEntity [id=" + id + ", album=" + album.getName() + ", user=" + user.getName()
-        + ", count=" + count + ", sumPierce=" + sumPierce + ", createDate=" + createDate + "]";
+  public void setProduct(ProductEntity product) {
+    this.product = product;
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(album, count, createDate, id, sumPierce, user);
-  }
 
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    OrderEntity other = (OrderEntity) obj;
-    return Objects.equals(album, other.album) && count == other.count
-        && Objects.equals(createDate, other.createDate) && id == other.id
-        && Double.doubleToLongBits(sumPierce) == Double.doubleToLongBits(other.sumPierce)
-        && Objects.equals(user, other.user);
-  }
 
   public long getId() {
     return id;
@@ -110,14 +94,6 @@ public class OrderEntity implements Serializable {
     this.id = id;
   }
 
-
-  public AlbumEntity getAlbum() {
-    return album;
-  }
-
-  public void setAlbum(AlbumEntity album) {
-    this.album = album;
-  }
 
 
   public UserEntity getUser() {

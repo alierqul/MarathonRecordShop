@@ -1,4 +1,4 @@
-package com.aliergul.util;
+package com.aliergul.util.exception;
 
 import java.io.Serializable;
 

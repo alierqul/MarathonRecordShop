@@ -6,10 +6,10 @@ import javax.persistence.TypedQuery;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
-import com.aliergul.controller.entity.album.AlbumController;
+import com.aliergul.controller.entity.product.ProductControllerImpl;
 import com.aliergul.controller.entity.user.UserControllerImpl;
-import com.aliergul.entity.AlbumEntity;
 import com.aliergul.entity.OrderEntity;
+import com.aliergul.entity.ProductEntity;
 
 public class OrderControlerImpl implements IOrderControlable {
 
@@ -19,17 +19,18 @@ public class OrderControlerImpl implements IOrderControlable {
   @Override
   public boolean create(OrderEntity order) {
     try {
-      AlbumEntity album = order.getAlbum();
+      ProductEntity product = order.getProduct();
       Session session = databaseConnectionHibernate();
       session.getTransaction().begin();
       session.persist(order);
       session.getTransaction().commit();
       logger.info(TAG + "/ create / isSuccesful \n" + order.toString());
 
-      AlbumController albumController = new AlbumController();
-      album.setSalesCount(album.getSalesCount() + order.getCount());
-      album.setStockCount(album.getStockCount() - order.getCount());
-      albumController.update(album);
+      ProductControllerImpl productController = new ProductControllerImpl();
+      product.setSalesCount(product.getSalesCount() + order.getCount());
+      product.setStockCount(product.getStockCount() - order.getCount());
+
+      productController.update(product);
 
       return true;
 

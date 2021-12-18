@@ -5,6 +5,8 @@ import org.hibernate.cfg.Configuration;
 import com.aliergul.entity.AlbumEntity;
 import com.aliergul.entity.CategoryEntity;
 import com.aliergul.entity.OrderEntity;
+import com.aliergul.entity.ProductEntity;
+import com.aliergul.entity.ProductTypeEntity;
 import com.aliergul.entity.SingerEntity;
 import com.aliergul.entity.UserEntity;
 
@@ -16,12 +18,16 @@ public class HibernateUtils {
       Configuration configuration = new Configuration();
 
       // entity class'larımızı buraya ekleyeceğiz
-
-      configuration.addAnnotatedClass(UserEntity.class);
       configuration.addAnnotatedClass(AlbumEntity.class);
-      configuration.addAnnotatedClass(SingerEntity.class);
-      configuration.addAnnotatedClass(OrderEntity.class);
       configuration.addAnnotatedClass(CategoryEntity.class);
+      configuration.addAnnotatedClass(OrderEntity.class);
+      configuration.addAnnotatedClass(ProductEntity.class);
+      configuration.addAnnotatedClass(ProductTypeEntity.class);
+      configuration.addAnnotatedClass(SingerEntity.class);
+      configuration.addAnnotatedClass(UserEntity.class);
+
+
+
       SessionFactory factory = configuration.configure("hibernate.cfg.xml").buildSessionFactory();
 
       return factory;

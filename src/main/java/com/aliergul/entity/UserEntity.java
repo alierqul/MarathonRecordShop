@@ -1,13 +1,14 @@
 package com.aliergul.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
+import com.aliergul.util.EStatus;
 
 @Entity
 @Table(name = "tbl_users")
@@ -36,13 +38,14 @@ public class UserEntity implements Serializable {
   @Column(name = "user_passsword")
   private String password;
   @Column(name = "user_phone")
-  private String phone;
+  private String phone = "";
   @Column(name = "user_address")
-  private String address;
+  private String address = "";
+  @Enumerated
   @Column(name = "user_status")
-  private String status;
+  private EStatus status = EStatus.ACTIVE;
   @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  private List<OrderEntity> orders = new ArrayList();
+  private Set<OrderEntity> orders = new HashSet<OrderEntity>();
   @Temporal(value = TemporalType.TIMESTAMP)
   @CreationTimestamp
   @Column(name = "user_createDate", nullable = false)
@@ -53,20 +56,6 @@ public class UserEntity implements Serializable {
     this.password = passsword;
   }
 
-
-  public UserEntity(long id, String name, String surname, String email, String passsword,
-      String phone, String address, String status, Date createDate) {
-    super();
-    this.id = id;
-    this.name = name;
-    this.surname = surname;
-    this.email = email;
-    this.password = passsword;
-    this.phone = phone;
-    this.address = address;
-    this.status = status;
-    this.createDate = createDate;
-  }
 
 
   public UserEntity(String name, String surname, String email, String passsword) {
@@ -80,6 +69,25 @@ public class UserEntity implements Serializable {
   public UserEntity() {
 
   }
+
+
+
+  public UserEntity(long id, String name, String surname, String email, String password,
+      String phone, String address, EStatus status, Set<OrderEntity> orders, Date createDate) {
+    super();
+    this.id = id;
+    this.name = name;
+    this.surname = surname;
+    this.email = email;
+    this.password = password;
+    this.phone = phone;
+    this.address = address;
+    this.status = status;
+    this.orders = orders;
+    this.createDate = createDate;
+  }
+
+
 
   @Override
   public String toString() {
@@ -97,6 +105,7 @@ public class UserEntity implements Serializable {
   }
 
 
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -109,19 +118,34 @@ public class UserEntity implements Serializable {
     return Objects.equals(address, other.address) && Objects.equals(createDate, other.createDate)
         && Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
         && Objects.equals(orders, other.orders) && Objects.equals(password, other.password)
-        && Objects.equals(phone, other.phone) && Objects.equals(status, other.status)
+        && Objects.equals(phone, other.phone) && status == other.status
         && Objects.equals(surname, other.surname);
   }
 
 
-  public List<OrderEntity> getOrders() {
+
+  public EStatus getStatus() {
+    return status;
+  }
+
+
+
+  public void setStatus(EStatus status) {
+    this.status = status;
+  }
+
+
+
+  public Set<OrderEntity> getOrders() {
     return orders;
   }
 
 
-  public void setOrders(List<OrderEntity> orders) {
+
+  public void setOrders(Set<OrderEntity> orders) {
     this.orders = orders;
   }
+
 
 
   public long getId() {
@@ -180,13 +204,6 @@ public class UserEntity implements Serializable {
     this.address = address;
   }
 
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
 
   public Date getCreateDate() {
     return createDate;
@@ -194,6 +211,24 @@ public class UserEntity implements Serializable {
 
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
+  }
+
+
+
+  public String getPassword() {
+    return password;
+  }
+
+
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+
+
+  public static long getSerialversionuid() {
+    return serialVersionUID;
   }
 
 

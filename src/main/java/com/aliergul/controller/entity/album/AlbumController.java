@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import com.aliergul.entity.AlbumEntity;
 import com.aliergul.entity.SingerEntity;
-import com.aliergul.util.EStatus;
 
 public class AlbumController implements IAlbumControlable {
 
@@ -149,19 +148,12 @@ public class AlbumController implements IAlbumControlable {
       AlbumEntity findEntity = find(album.getId());
       if (findEntity != null) {
 
-        if (album.getStockCount() <= 2) {
-          album.setStatus(EStatus.PASIF);
-        }
-
-        findEntity.setDiscountRate(album.getDiscountRate());
         findEntity.setImgAlbum(album.getImgAlbum());
         findEntity.setName(album.getName());
-        findEntity.setPierce(album.getPierce());
-        findEntity.setSalesCount(album.getSalesCount());
         findEntity.setSinger(album.getSinger());
-        findEntity.setStatus(album.getStatus());
-        findEntity.setStockCount(album.getStockCount());
         findEntity.setCategories(album.getCategories());
+        findEntity.setProducts(album.getProducts());
+
         Session session = databaseConnectionHibernate();
         session.getTransaction().begin();
         session.merge(findEntity);
