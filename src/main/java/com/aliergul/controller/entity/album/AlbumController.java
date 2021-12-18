@@ -73,7 +73,7 @@ public class AlbumController implements IAlbumControlable {
   public List<AlbumEntity> list() {
     Session session = databaseConnectionHibernate();
 
-    String hql = "select str from AlbumEntity as str where str.movieid>=:startCount";
+    String hql = "select a from AlbumEntity as a where a.id>=:startCount";
     TypedQuery<AlbumEntity> typedQuery = session.createQuery(hql, AlbumEntity.class);
     typedQuery.setParameter("startCount", 1L);
 
@@ -161,7 +161,7 @@ public class AlbumController implements IAlbumControlable {
         findEntity.setSinger(album.getSinger());
         findEntity.setStatus(album.getStatus());
         findEntity.setStockCount(album.getStockCount());
-        findEntity.setType(album.getType());
+        findEntity.setCategories(album.getCategories());
         Session session = databaseConnectionHibernate();
         session.getTransaction().begin();
         session.merge(findEntity);

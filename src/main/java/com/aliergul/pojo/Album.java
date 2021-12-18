@@ -1,4 +1,4 @@
-package com.aliergul.entity;
+package com.aliergul.pojo;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -11,80 +11,33 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.hibernate.annotations.CreationTimestamp;
+import com.aliergul.entity.CategoryEntity;
+import com.aliergul.entity.OrderEntity;
 import com.aliergul.util.EStatus;
 
-@Entity
-@Table(name = "tbl_albums")
-public class AlbumEntity implements Serializable {
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 9092640668543747511L;
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "album_id")
+
+public class Album implements Serializable {
+
   private long id;
-  @Column(name = "album_name")
   private String name = "";
-  @Column(name = "album_pierce")
   private double pierce = 0.0;
-
-  @Lob
-  @Column(name = "album_imgAlbum")
   private byte[] imgAlbum;
-
-  @Column(name = "album_discountRate")
   private double discountRate = 0.0;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "singer_id")
-  private SingerEntity singer;
-
-  @ManyToMany
-  @JoinTable(name = "tbl_album_category", joinColumns = {@JoinColumn(name = "album_id")},
-      inverseJoinColumns = {@JoinColumn(name = "category_id")})
+  private Singer singer;
   private Set<CategoryEntity> categories = new HashSet<CategoryEntity>();
-
-  @Enumerated(EnumType.STRING)
-  @Column(name = "album_status")
   private EStatus status = EStatus.ACTIVE;
-  @Column(name = "album_stockCount")
   private long stockCount = 0;
-  @Column(name = "album_salesCount")
   private long salesCount = 0;
-
-  @OneToMany(mappedBy = "album", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private List<OrderEntity> orders = new ArrayList<OrderEntity>();
-  @Temporal(value = TemporalType.TIMESTAMP)
-  @CreationTimestamp
-  @Column(name = "album_createDate")
   private Date createDate;
 
-  public AlbumEntity() {
+  public Album() {
 
   }
 
-  public AlbumEntity(long id, String name, double pierce, byte[] imgAlbum, double discountRate,
-      SingerEntity singer, Set<CategoryEntity> categories, EStatus status, long stockCount,
+  public Album(long id, String name, double pierce, byte[] imgAlbum, double discountRate,
+      Singer singer, Set<CategoryEntity> categories, EStatus status, long stockCount,
       long salesCount, List<OrderEntity> orders, Date createDate) {
     super();
     this.id = id;
@@ -103,7 +56,7 @@ public class AlbumEntity implements Serializable {
 
 
 
-  public AlbumEntity(String name, double pierce, long stockCount) {
+  public Album(String name, double pierce, long stockCount) {
     super();
     this.name = name;
     this.pierce = pierce;
@@ -115,9 +68,9 @@ public class AlbumEntity implements Serializable {
   @Override
   public String toString() {
     return "AlbumEntity [id=" + id + ", name=" + name + ", pierce=" + pierce + ", imgAlbum="
-        + Arrays.toString(imgAlbum) + ", discountRate=" + discountRate + ", status=" + status
-        + ", stockCount=" + stockCount + ", salesCount=" + salesCount + ", orders=" + orders
-        + ", createDate=" + createDate + "]";
+        + Arrays.toString(imgAlbum) + ", discountRate=" + discountRate + ", categories="
+        + categories + ", status=" + status + ", stockCount=" + stockCount + ", salesCount="
+        + salesCount + ", orders=" + orders + ", createDate=" + createDate + "]";
   }
 
 
@@ -140,7 +93,7 @@ public class AlbumEntity implements Serializable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    AlbumEntity other = (AlbumEntity) obj;
+    Album other = (Album) obj;
     return Objects.equals(categories, other.categories)
         && Objects.equals(createDate, other.createDate)
         && Double.doubleToLongBits(discountRate) == Double.doubleToLongBits(other.discountRate)
@@ -198,11 +151,11 @@ public class AlbumEntity implements Serializable {
   }
 
 
-  public SingerEntity getSinger() {
+  public Singer getSinger() {
     return singer;
   }
 
-  public void setSinger(SingerEntity singer) {
+  public void setSinger(Singer singer) {
     this.singer = singer;
   }
 
@@ -258,10 +211,6 @@ public class AlbumEntity implements Serializable {
 
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
-  }
-
-  public static long getSerialversionuid() {
-    return serialVersionUID;
   }
 
 

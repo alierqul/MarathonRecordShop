@@ -1,6 +1,8 @@
 package com.aliergul.controller.entity.order;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.TypedQuery;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -59,8 +61,15 @@ public class OrderControlerImpl implements IOrderControlable {
 
   @Override
   public List<OrderEntity> list() {
-    // TODO Auto-generated method stub
-    return null;
+    Session session = databaseConnectionHibernate();
+
+    String hql = "select u from OrderEntity as u where u.id>=:startCount";
+    TypedQuery<OrderEntity> typedQuery = session.createQuery(hql, OrderEntity.class);
+    typedQuery.setParameter("startCount", 1L);
+
+    ArrayList<OrderEntity> arrayList = (ArrayList<OrderEntity>) typedQuery.getResultList();
+
+    return arrayList;
   }
 
   @Override

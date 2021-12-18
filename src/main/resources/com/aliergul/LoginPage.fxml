@@ -60,12 +60,12 @@
                                        <children>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                                              <image>
-                                                <Image url="@../../../img/email.png" />
+                                                <Image url="@img/email.png" />
                                              </image>
                                           </ImageView>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                                              <image>
-                                                <Image url="@../../../img/password.png" />
+                                                <Image url="@img/password.png" />
                                              </image>
                                           </ImageView>
                                           <Label text="Email" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -144,22 +144,22 @@
                                           <PasswordField fx:id="register_edt_re_password" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                                              <image>
-                                                <Image url="@../../../img/user.png" />
+                                                <Image url="@img/user.png" />
                                              </image>
                                           </ImageView>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                                              <image>
-                                                <Image url="@../../../img/email.png" />
+                                                <Image url="@img/email.png" />
                                              </image>
                                           </ImageView>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                                              <image>
-                                                <Image url="@../../../img/password.png" />
+                                                <Image url="@img/password.png" />
                                              </image>
                                           </ImageView>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
                                              <image>
-                                                <Image url="@../../../img/password.png" />
+                                                <Image url="@img/password.png" />
                                              </image>
                                           </ImageView>
                                           <Label text="Soyisim" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -170,7 +170,7 @@
                                           <TextField fx:id="register_edt_surname" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                                              <image>
-                                                <Image url="@../../../img/user.png" />
+                                                <Image url="@img/user.png" />
                                              </image>
                                           </ImageView>
                                        </children>

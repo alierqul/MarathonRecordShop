@@ -1,5 +1,7 @@
 package com.aliergul.controller.entity.user;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import javax.persistence.TypedQuery;
 import org.apache.log4j.LogManager;
@@ -73,6 +75,19 @@ public class UserControllerImpl implements IUserLoginable {
   public void sendActivasyonMail(String email) {
     logger.info(TAG + "/ sendActivasyonMail / Activasyon Email \n" + email);
 
+  }
+
+  @Override
+  public List<UserEntity> list() {
+    Session session = databaseConnectionHibernate();
+
+    String hql = "select u from UserEntity as u where u.id>=:startCount";
+    TypedQuery<UserEntity> typedQuery = session.createQuery(hql, UserEntity.class);
+    typedQuery.setParameter("startCount", 1L);
+
+    ArrayList<UserEntity> arrayList = (ArrayList<UserEntity>) typedQuery.getResultList();
+
+    return arrayList;
   }
 
 

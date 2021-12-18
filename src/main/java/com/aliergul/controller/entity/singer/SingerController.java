@@ -1,5 +1,8 @@
 package com.aliergul.controller.entity.singer;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.TypedQuery;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -63,6 +66,19 @@ public class SingerController implements ISingerControlable {
 
     }
     return null;
+  }
+
+  @Override
+  public List<SingerEntity> list() {
+    Session session = databaseConnectionHibernate();
+
+    String hql = "select s from SingerEntity as s where s.id>=:startCount";
+    TypedQuery<SingerEntity> typedQuery = session.createQuery(hql, SingerEntity.class);
+    typedQuery.setParameter("startCount", 1L);
+
+    ArrayList<SingerEntity> arrayList = (ArrayList<SingerEntity>) typedQuery.getResultList();
+
+    return arrayList;
   }
 
 

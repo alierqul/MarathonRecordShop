@@ -1,5 +1,6 @@
 package com.aliergul.controller.entity.user;
 
+import java.util.List;
 import java.util.Optional;
 import org.hibernate.Session;
 import com.aliergul.entity.UserEntity;
@@ -14,6 +15,8 @@ public interface IUserLoginable {
   public UserEntity find(long id);
 
   public void sendActivasyonMail(String email);
+
+  public List<UserEntity> list();
 
   default Session databaseConnectionHibernate() {
     return HibernateUtils.getSessionFactory().openSession();
