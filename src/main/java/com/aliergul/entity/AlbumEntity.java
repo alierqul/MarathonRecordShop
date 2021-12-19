@@ -26,6 +26,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "tbl_albums")
@@ -39,13 +40,16 @@ public class AlbumEntity implements Serializable {
 
   @Column(name = "album_name")
   private String name = "";
-
+  // org.hibernate.type.ImageType
+  // org.hibernate.type.StringType
+  // @Type(type = "org.hibernate.type.ImageType")
   @Lob
-  @Column(name = "album_imgAlbum", columnDefinition = "TEXT")
+  @Type(type = "org.hibernate.type.MaterializedBlobType")
+  @Column(name = "album_imgAlbum")
   private byte[] imgAlbum;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "singer_id")
+  @ManyToOne()
+  @JoinColumn(name = "singer_id", referencedColumnName = "singer_id")
   private SingerEntity singer;
 
   @ManyToMany
@@ -64,8 +68,6 @@ public class AlbumEntity implements Serializable {
   public AlbumEntity() {
 
   }
-
-
 
   public AlbumEntity(String name, String imgAlbumPATH, SingerEntity singer,
       Set<CategoryEntity> categories) throws IOException {
@@ -100,12 +102,13 @@ public class AlbumEntity implements Serializable {
   }
 
 
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
     result = prime * result + Arrays.hashCode(imgAlbum);
-    result = prime * result + Objects.hash(categories, createDate, id, name, products, singer);
+    result = prime * result + Objects.hash(createDate, id, name, singer);
     return result;
   }
 
@@ -118,10 +121,9 @@ public class AlbumEntity implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     AlbumEntity other = (AlbumEntity) obj;
-    return Objects.equals(categories, other.categories)
-        && Objects.equals(createDate, other.createDate) && id == other.id
+    return Objects.equals(createDate, other.createDate) && id == other.id
         && Arrays.equals(imgAlbum, other.imgAlbum) && Objects.equals(name, other.name)
-        && Objects.equals(products, other.products) && Objects.equals(singer, other.singer);
+        && Objects.equals(singer, other.singer);
   }
 
   public long getId() {

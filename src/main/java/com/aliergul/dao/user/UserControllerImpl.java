@@ -70,10 +70,10 @@ public class UserControllerImpl implements IUserLoginable, IDBCrudControlable<Us
   public List<UserEntity> list() {
     Session session = databaseConnectionHibernate();
 
-    String hql = "select u from UserEntity as u where u.id>=:startCount";
+    String hql = "select u from UserEntity as u where u.id>=:startCount and u.status=:status";
     TypedQuery<UserEntity> typedQuery = session.createQuery(hql, UserEntity.class);
     typedQuery.setParameter("startCount", 1L);
-
+    typedQuery.setParameter("status", EStatus.ACTIVE);
     ArrayList<UserEntity> arrayList = (ArrayList<UserEntity>) typedQuery.getResultList();
 
     return arrayList;
@@ -103,7 +103,10 @@ public class UserControllerImpl implements IUserLoginable, IDBCrudControlable<Us
       UserEntity findEntity = find(entity.getId());
       if (findEntity != null) {
         findEntity.setStatus(EStatus.DELETED);
-        update(findEntity);
+        Session session = databaseConnectionHibernate();
+        session.getTransaction().begin();
+        session.merge(findEntity);
+        session.getTransaction().commit();
         logger.info(TAG + "/ onDeleted / isSuccesful \n" + findEntity.toString());
         return true;
       }

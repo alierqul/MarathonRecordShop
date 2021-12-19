@@ -100,8 +100,7 @@ public class UserEntity implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(address, createDate, email, id, name, orders, password, phone, status,
-        surname);
+    return Objects.hash(address, createDate, email, id, name, password, phone, status, surname);
   }
 
 
@@ -117,9 +116,8 @@ public class UserEntity implements Serializable {
     UserEntity other = (UserEntity) obj;
     return Objects.equals(address, other.address) && Objects.equals(createDate, other.createDate)
         && Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
-        && Objects.equals(orders, other.orders) && Objects.equals(password, other.password)
-        && Objects.equals(phone, other.phone) && status == other.status
-        && Objects.equals(surname, other.surname);
+        && Objects.equals(password, other.password) && Objects.equals(phone, other.phone)
+        && status == other.status && Objects.equals(surname, other.surname);
   }
 
 

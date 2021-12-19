@@ -1,6 +1,8 @@
 package com.aliergul.fx.controller;
 
+import java.io.IOException;
 import java.util.Optional;
+import com.aliergul.FXMain;
 import com.aliergul.dao.user.UserControllerImpl;
 import com.aliergul.entity.UserEntity;
 import javafx.fxml.FXML;
@@ -12,6 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class LoginPageController {
+  private static final String ADMIN = "admin";
+  private static final String PASSWORD = "qwerty";
+  private FXMain main;
   // Login View items
   @FXML
   private Button btn_login;
@@ -43,7 +48,7 @@ public class LoginPageController {
   // Button On Click Listener Progress
 
   @FXML
-  void onClickBtnLogin(MouseEvent event) {
+  void onClickBtnLogin(MouseEvent event) throws IOException {
     UserControllerImpl dao = new UserControllerImpl();
 
     String email = edt_user_email.getText().trim().toLowerCase();
@@ -51,10 +56,15 @@ public class LoginPageController {
 
     Optional<UserEntity> optUser = dao.onLogin(new UserEntity(email, password));
     if (optUser.isEmpty()) {
-      Alert alert = new Alert(AlertType.WARNING);
-      alert.setHeaderText("Email ya da Şifre Hatalı");
-      alert.setTitle("Giriş Başarısız");
-      alert.show();
+      if (email.equals(ADMIN) && password.equals(PASSWORD)) {
+        main.loadAdminPage();
+      } else {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setHeaderText("Email ya da Şifre Hatalı");
+        alert.setTitle("Giriş Başarısız");
+        alert.show();
+      }
+
     } else {
       Alert alert = new Alert(AlertType.INFORMATION);
       alert.setHeaderText("Email ya da Şifre Doğrudur");
@@ -77,6 +87,11 @@ public class LoginPageController {
       alert.show();
     }
 
+
+  }
+
+  public void initAdminPanel(FXMain main) {
+    this.main = main;
 
   }
 

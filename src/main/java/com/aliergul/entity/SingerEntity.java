@@ -1,13 +1,15 @@
 package com.aliergul.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
+import com.aliergul.util.EStatus;
 
 @Entity
 @Table(name = "tbl_singers")
@@ -34,8 +37,12 @@ public class SingerEntity implements Serializable {
   @Column(name = "singer_bio")
   private String bio;
 
+  @Enumerated(EnumType.STRING)
+  @Column(name = "singer_status")
+  private EStatus status = EStatus.ACTIVE;
+
   @OneToMany(mappedBy = "singer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  private List<AlbumEntity> albums = new ArrayList<AlbumEntity>();
+  private Set<AlbumEntity> albums = new HashSet<AlbumEntity>();
 
   @Temporal(value = TemporalType.TIMESTAMP)
   @CreationTimestamp
@@ -56,13 +63,15 @@ public class SingerEntity implements Serializable {
   }
 
 
-  public SingerEntity(long id, String name, String surname, String bio, List<AlbumEntity> albums,
-      Date createDate) {
+
+  public SingerEntity(long id, String name, String surname, String bio, EStatus status,
+      Set<AlbumEntity> albums, Date createDate) {
     super();
     this.id = id;
     this.name = name;
     this.surname = surname;
     this.bio = bio;
+    this.status = status;
     this.albums = albums;
     this.createDate = createDate;
   }
@@ -75,9 +84,10 @@ public class SingerEntity implements Serializable {
   }
 
 
+
   @Override
   public int hashCode() {
-    return Objects.hash(albums, bio, createDate, id, name, surname);
+    return Objects.hash(bio, createDate, id, name, surname);
   }
 
 
@@ -90,9 +100,9 @@ public class SingerEntity implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     SingerEntity other = (SingerEntity) obj;
-    return Objects.equals(albums, other.albums) && Objects.equals(bio, other.bio)
-        && Objects.equals(createDate, other.createDate) && id == other.id
-        && Objects.equals(name, other.name) && Objects.equals(surname, other.surname);
+    return Objects.equals(bio, other.bio) && Objects.equals(createDate, other.createDate)
+        && id == other.id && Objects.equals(name, other.name)
+        && Objects.equals(surname, other.surname);
   }
 
 
@@ -136,12 +146,22 @@ public class SingerEntity implements Serializable {
   }
 
 
-  public List<AlbumEntity> getAlbums() {
+  public EStatus getStatus() {
+    return status;
+  }
+
+
+  public void setStatus(EStatus status) {
+    this.status = status;
+  }
+
+
+  public Set<AlbumEntity> getAlbums() {
     return albums;
   }
 
 
-  public void setAlbums(List<AlbumEntity> albums) {
+  public void setAlbums(Set<AlbumEntity> albums) {
     this.albums = albums;
   }
 

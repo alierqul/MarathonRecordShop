@@ -9,6 +9,8 @@ import org.hibernate.Session;
 import com.aliergul.dao.user.UserControllerImpl;
 import com.aliergul.entity.OrderEntity;
 import com.aliergul.entity.ProductEntity;
+import com.aliergul.util.EStatus;
+import com.aliergul.util.exception.ExceptionNotSalableProduct;
 
 public class OrderControlerImpl implements IDBCrudControlable<OrderEntity> {
 
@@ -17,7 +19,11 @@ public class OrderControlerImpl implements IDBCrudControlable<OrderEntity> {
 
   @Override
   public boolean create(OrderEntity order) {
+
     try {
+      if (order.getProduct().getStatus() == EStatus.PASIF) {
+        throw new ExceptionNotSalableProduct("Ürün Satılmaz!");
+      }
       ProductEntity product = order.getProduct();
       Session session = databaseConnectionHibernate();
       session.getTransaction().begin();
@@ -26,8 +32,8 @@ public class OrderControlerImpl implements IDBCrudControlable<OrderEntity> {
       logger.info(TAG + "/ create / isSuccesful \n" + order.toString());
 
       ProductControllerImpl productController = new ProductControllerImpl();
-      product.setSalesCount(product.getSalesCount() + order.getCount());
-      product.setStockCount(product.getStockCount() - order.getCount());
+      product.setSalesCount(product.getSalesCount() + order.getCount());// 10+2=12 satldı
+      product.setStockCount(product.getStockCount() - order.getCount());// 10-2=8 tane stockta
 
       productController.update(product);
 

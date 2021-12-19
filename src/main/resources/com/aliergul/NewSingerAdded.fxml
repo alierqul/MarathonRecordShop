@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aliergul.fx.admin.NewSingerAddedController">
+   <center>
+      <AnchorPane minHeight="400.0" minWidth="500.0" prefHeight="547.0" prefWidth="400.0" style="-fx-background-color: #EBE6E0;">
+          <children>
+            <GridPane layoutX="18.0" layoutY="67.0" prefHeight="120.0" prefWidth="488.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="153.0" minWidth="10.0" prefWidth="30.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="271.0" minWidth="10.0" prefWidth="271.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                    <Text fill="#a0a2ab" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" wrappingWidth="83.294921875" />
+                    <Text fill="#a0a2ab" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname :" wrappingWidth="91.294921875" GridPane.rowIndex="1" />
+                  <Text fill="#a0a2ab" strokeType="OUTSIDE" strokeWidth="0.0" text="Bigrafi" wrappingWidth="83.294921875" GridPane.rowIndex="2" />
+                    <TextField fx:id="singer_edt_name" prefHeight="25.0" prefWidth="200.0" text="sdf" GridPane.columnIndex="1">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </TextField>
+                    <TextField fx:id="singer_edt_surname" prefHeight="25.0" prefWidth="200.0" text="sdf" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </TextField>
+              
+                    
+                  <TextField fx:id="singer_edt_bio" alignment="TOP_LEFT" prefHeight="80.0" prefWidth="200.0" text="sdf" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </TextField>
+                    <Button fx:id="singer_btn_new" contentDisplay="CENTER" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onMouseClicked="#onNewSinger" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #5E8A75;" text="Yeni" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true" GridPane.columnIndex="2" />
+                  <Button fx:id="singer_btn_save" contentDisplay="CENTER" defaultButton="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false"  onMouseClicked="#onSaveSinger" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #5E8A75;" text="Kaydet" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button fx:id="singer_btn_delete" contentDisplay="CENTER" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onMouseClicked="#onDeletedSinger" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #5E8A75;" text="Sil" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin></Button>
+               </children>
+            </GridPane>
+            <Text fill="#a0a2ab" strokeType="OUTSIDE" strokeWidth="0.0" text="Sanatçı Bilgileri" textAlignment="CENTER" wrappingWidth="411.294921875" AnchorPane.bottomAnchor="493.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="12.0">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="30.0" />
+               </font>
+            </Text>
+          </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label text="Arama" />
+                  <TextArea fx:id="singer_edt_searchtext" minHeight="25.0" minWidth="200.0" prefHeight="30.0" prefWidth="200.0" />
+                  <TableView fx:id="singer_table_view" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="singer_table_colum_name" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="İsim" />
+                      <TableColumn fx:id="singer_table_colum_surname" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Soyİsim" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>

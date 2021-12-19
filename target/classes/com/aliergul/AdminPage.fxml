@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- fx:controller="com.bilgeadam.fx.controller.AdminHomePageController" -->
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aliergul.fx.admin.AdminHomePageController">
+   <center>
+      <AnchorPane prefHeight="800.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="800.0" prefWidth="603.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TableView fx:id="admin_table_singer" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="admin_colum_singer" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="Sanatçılar" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="admin_table_album" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="admin_colum_album" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="Albumler" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="admin_table_product" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="admin_colum_product" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="Tür" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Mağaza">
+            <items>
+              <MenuItem fx:id="admin_home_menu_singer" mnemonicParsing="false" onAction="#onOpenNewSingerPage" text="Sanatçı" />
+                  <MenuItem mnemonicParsing="false" onAction="#onOpenNewAlbumPage" text="Albüm" />
+                  <MenuItem mnemonicParsing="false" text="Teknoloji" />
+                  <MenuItem mnemonicParsing="false" text="Müzik Türü" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Kullanıcılar">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Sipariş listele" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Arama">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Albüm Ara" />
+                  <MenuItem mnemonicParsing="false" text="Kullanıcı Ara" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Hakkında">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </MenuBar>
+   </top>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

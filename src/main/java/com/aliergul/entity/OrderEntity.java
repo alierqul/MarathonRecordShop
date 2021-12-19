@@ -2,6 +2,7 @@ package com.aliergul.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -70,6 +71,30 @@ public class OrderEntity implements Serializable {
     this.count = count;
     this.sumPierce = sumPierce;
     this.createDate = createDate;
+  }
+
+
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(count, createDate, id, product, sumPierce, user);
+  }
+
+
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    OrderEntity other = (OrderEntity) obj;
+    return count == other.count && Objects.equals(createDate, other.createDate) && id == other.id
+        && Objects.equals(product, other.product)
+        && Double.doubleToLongBits(sumPierce) == Double.doubleToLongBits(other.sumPierce)
+        && Objects.equals(user, other.user);
   }
 
 

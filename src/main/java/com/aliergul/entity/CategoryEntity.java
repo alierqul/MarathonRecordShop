@@ -58,13 +58,14 @@ public class CategoryEntity implements Serializable {
 
   @Override
   public String toString() {
-    return "CategoryEntity [id=" + id + ", category=" + category + ", createDate=" + createDate
-        + "]";
+    return category;
   }
+
+
 
   @Override
   public int hashCode() {
-    return Objects.hash(albums, category, createDate, id);
+    return Objects.hash(category, createDate, id);
   }
 
   @Override
@@ -76,8 +77,8 @@ public class CategoryEntity implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     CategoryEntity other = (CategoryEntity) obj;
-    return Objects.equals(albums, other.albums) && Objects.equals(category, other.category)
-        && Objects.equals(createDate, other.createDate) && id == other.id;
+    return Objects.equals(category, other.category) && Objects.equals(createDate, other.createDate)
+        && id == other.id;
   }
 
   public long getId() {

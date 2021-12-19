@@ -7,6 +7,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import com.aliergul.entity.SingerEntity;
+import com.aliergul.util.EStatus;
+import com.aliergul.util.HibernateUtils;
 
 public class SingerController implements IDBCrudControlable<SingerEntity> {
 
@@ -34,9 +36,12 @@ public class SingerController implements IDBCrudControlable<SingerEntity> {
     try {
       SingerEntity findEntity = find(singer.getId());
       if (findEntity != null) {
+
+        findEntity.setStatus(EStatus.DELETED);
+
         Session session = databaseConnectionHibernate();
         session.getTransaction().begin();
-        session.remove(findEntity);
+        session.merge(findEntity);
         session.getTransaction().commit();
         logger.info(TAG + "/ onDeleted / isSuccesful \n" + findEntity.toString());
         return true;
@@ -45,13 +50,14 @@ public class SingerController implements IDBCrudControlable<SingerEntity> {
       logger.error(TAG + "/ onDeleted / ERROR:\n" + singer.toString() + "\n" + e.getMessage());
       e.printStackTrace();
     }
+    logger.error(TAG + "/ onDeleted / ERROR:\n" + singer.toString() + "\n");
     return false;
   }
 
   @Override
   public SingerEntity find(long id) {
 
-    Session session = databaseConnectionHibernate();
+    Session session = HibernateUtils.getSessionFactory().openSession();
     SingerEntity entity;
     try {
       entity = session.find(SingerEntity.class, id);
@@ -72,9 +78,10 @@ public class SingerController implements IDBCrudControlable<SingerEntity> {
   public List<SingerEntity> list() {
     Session session = databaseConnectionHibernate();
 
-    String hql = "select s from SingerEntity as s where s.id>=:startCount";
+    String hql = "select s from SingerEntity as s where s.id>=:startCount and s.status=:status";
     TypedQuery<SingerEntity> typedQuery = session.createQuery(hql, SingerEntity.class);
     typedQuery.setParameter("startCount", 1L);
+    typedQuery.setParameter("status", EStatus.ACTIVE);
 
     ArrayList<SingerEntity> arrayList = (ArrayList<SingerEntity>) typedQuery.getResultList();
 

@@ -126,8 +126,7 @@ public class ProductTypeEntity implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(createDate, descriptions, discDiameter, id, imageQuality, products,
-        runSpeed, type);
+    return Objects.hash(createDate, descriptions, discDiameter, id, imageQuality, runSpeed, type);
   }
 
 
@@ -144,8 +143,7 @@ public class ProductTypeEntity implements Serializable {
     return Objects.equals(createDate, other.createDate)
         && Objects.equals(descriptions, other.descriptions) && discDiameter == other.discDiameter
         && id == other.id && imageQuality == other.imageQuality
-        && Objects.equals(products, other.products) && Objects.equals(runSpeed, other.runSpeed)
-        && type == other.type;
+        && Objects.equals(runSpeed, other.runSpeed) && type == other.type;
   }
 
 

@@ -100,10 +100,12 @@ public class ProductEntity implements Serializable {
         + ", createDate=" + createDate + "]";
   }
 
+
+
   @Override
   public int hashCode() {
-    return Objects.hash(album, createDate, discountRate, id, orders, pierce, salesCount, status,
-        stockCount, typeProduct);
+    return Objects.hash(album, createDate, discountRate, id, pierce, salesCount, status, stockCount,
+        typeProduct);
   }
 
   @Override
@@ -117,7 +119,7 @@ public class ProductEntity implements Serializable {
     ProductEntity other = (ProductEntity) obj;
     return Objects.equals(album, other.album) && Objects.equals(createDate, other.createDate)
         && Double.doubleToLongBits(discountRate) == Double.doubleToLongBits(other.discountRate)
-        && id == other.id && Objects.equals(orders, other.orders)
+        && id == other.id
         && Double.doubleToLongBits(pierce) == Double.doubleToLongBits(other.pierce)
         && salesCount == other.salesCount && status == other.status
         && stockCount == other.stockCount && Objects.equals(typeProduct, other.typeProduct);
