@@ -1,6 +1,8 @@
 package com.aliergul.fx.admin;
 
+import java.io.IOException;
 import java.util.Optional;
+import com.aliergul.FXMain;
 import com.aliergul.dao.SingerController;
 import com.aliergul.entity.SingerEntity;
 import javafx.beans.property.SimpleStringProperty;
@@ -54,6 +56,19 @@ public class NewSingerAddedController {
 
   @FXML
   private TableView<SingerEntity> singer_table_view;
+
+  @FXML
+  private Button singer_btn_back;
+  private FXMain main;
+
+  @FXML
+  void onBackMainMenu(MouseEvent event) {
+    try {
+      main.loadAdminPage();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   @FXML
   void onDeletedSinger(MouseEvent event) {
@@ -133,8 +148,8 @@ public class NewSingerAddedController {
 
 
 
-  public void initAdminPanel() {
-
+  public void initAdminPanel(FXMain main) {
+    this.main = main;
     onNewSinger(null);
     singers.setAll(singerController.list());
     singer_table_view.setItems(singers);

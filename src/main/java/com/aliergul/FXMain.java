@@ -49,7 +49,7 @@ public class FXMain extends Application {
     FXMLLoader fxmlLoader = new FXMLLoader(FXMain.class.getResource("NewSingerAdded" + ".fxml"));
     scene.setRoot(fxmlLoader.load());
     NewSingerAddedController controller = fxmlLoader.getController();
-    controller.initAdminPanel();
+    controller.initAdminPanel(this);
 
 
   }
