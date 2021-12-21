@@ -132,7 +132,7 @@ public enum TestMenu {
     // DVD CD VinVyl Tanımlıyoruz
     ProductTypeEntity CD = null, DVD = null;
     try {
-      CD = new ProductTypeEntity(EProduct.CD, EDiskQuality.HD, null, null, "Standart");
+      CD = new ProductTypeEntity(EProduct.CD, EDiskQuality.HD, null, null, "standart");
       typeControllerImpl.create(CD);
       DVD = new ProductTypeEntity(EProduct.DVD, EDiskQuality.HD, null, null, "Standart");
       typeControllerImpl.create(DVD);

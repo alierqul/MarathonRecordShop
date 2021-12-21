@@ -1,0 +1,39 @@
+
+.root{
+	-fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-background-color: linear-gradient(
+    from 0% 0% to 100% 200%,
+    repeat,
+    #fbeee6 0%,
+    #EBE6E0 50%
+  );
+  -fx-font-family: "Comic Sans MS";
+}
+
+
+.button { 
+   -fx-background-color: #5E8A75;
+   -fx-text-fill: white; 
+  
+}
+
+.button:hover {
+    -fx-underline: true;
+    -fx-opacity: 0.5;
+    -fx-border-color: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%)
+}
+
+.album_img_capture {
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 5;
+}
+
+.button-with-margin {
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+

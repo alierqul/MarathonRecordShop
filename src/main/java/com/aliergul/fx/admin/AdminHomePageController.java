@@ -87,6 +87,26 @@ public class AdminHomePageController {
   }
 
   @FXML
+  void onLogOut(ActionEvent event) {
+    try {
+      main.loadLoginPage();
+    } catch (IOException e) {
+
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  void onOpenNewCategoryPage(ActionEvent event) {
+    try {
+      main.loadNewCategory();
+    } catch (IOException e) {
+
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
   void onOpenNewAlbumPage(ActionEvent event) {
     try {
       main.loadNewAlbum();

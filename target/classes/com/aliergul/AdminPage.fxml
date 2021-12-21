@@ -47,7 +47,8 @@
               <MenuItem fx:id="admin_home_menu_singer" mnemonicParsing="false" onAction="#onOpenNewSingerPage" text="Sanatçı" />
                   <MenuItem mnemonicParsing="false" onAction="#onOpenNewAlbumPage" text="Albüm" />
                   <MenuItem mnemonicParsing="false" text="Teknoloji" />
-                  <MenuItem mnemonicParsing="false" text="Müzik Türü" />
+                  <MenuItem mnemonicParsing="false" onAction="#onOpenNewCategoryPage" text="Müzik Türü" />
+                  <MenuItem mnemonicParsing="false" onAction="#onLogOut" text="Çıkış Yap" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Kullanıcılar">

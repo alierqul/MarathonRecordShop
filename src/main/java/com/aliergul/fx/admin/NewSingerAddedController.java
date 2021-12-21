@@ -1,10 +1,10 @@
 package com.aliergul.fx.admin;
 
 import java.io.IOException;
-import java.util.Optional;
 import com.aliergul.FXMain;
 import com.aliergul.dao.SingerController;
 import com.aliergul.entity.SingerEntity;
+import com.aliergul.util.MyDialogHelper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -26,6 +25,7 @@ public class NewSingerAddedController {
   private SingerController singerController = new SingerController();
   ObservableList<SingerEntity> singers = FXCollections.observableArrayList();
   SingerEntity chooseSinger;
+
 
   @FXML
   private Button singer_btn_delete;
@@ -72,37 +72,20 @@ public class NewSingerAddedController {
 
   @FXML
   void onDeletedSinger(MouseEvent event) {
+
     if (chooseSinger.getId() > 0) {
-      if (alertDialog("Silme İşlemi",
+
+      if (MyDialogHelper.getInstance.alertDialog("Silme İşlemi",
           chooseSinger.getName() + " " + chooseSinger.getSurname() + " Sanatçısı Silinecektir",
           "Silme İşlemini Onaylıyor musunuz?")) {
         if (singerController.delete(chooseSinger)) {
+          onNewSinger(null);
           singers.removeAll();
           singers.setAll(singerController.list());
         }
       }
 
     }
-  }
-
-  private boolean alertDialog(String title, String header, String footer) {
-    Alert alert = new Alert(AlertType.WARNING);
-    alert.setTitle(title);
-    alert.setHeaderText(header);
-    alert.setContentText(footer);
-
-    ButtonType yesButton = new ButtonType("Evet");
-    ButtonType noButton = new ButtonType("Hayır");
-
-
-    alert.getButtonTypes().setAll(yesButton, noButton);
-
-    Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == yesButton) {
-      return true;
-    } else
-      return false;
-
   }
 
 
@@ -176,6 +159,10 @@ public class NewSingerAddedController {
 
           }
         });
+
+
   }
+
+
 
 }

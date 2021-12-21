@@ -48,8 +48,9 @@ public class ProductTypeEntity implements Serializable {
   @Column(name = "type_disc_diameter")
   private EDiskDiameter discDiameter = EDiskDiameter.RECORD_33;
 
+  @Enumerated(EnumType.STRING)
   @Column(name = "type_run_speed")
-  private String runSpeed = "bilinmiyor";
+  private EDiskDiameter runSpeed = EDiskDiameter.RECORD_33;
 
   @Column(name = "type_descriptions")
   private String descriptions = "";
@@ -71,9 +72,8 @@ public class ProductTypeEntity implements Serializable {
 
 
   public ProductTypeEntity(EProduct type, EDiskQuality imageQuality, EDiskDiameter discDiameter,
-      String runSpeed, String descriptions)
+      EDiskDiameter runSpeed, String descriptions)
       throws ExceptionNotImageQuality, ExceptionNotInformationRunSpeedOrDisDiameter {
-    this();
     this.type = type;
     this.imageQuality = imageQuality;
     this.discDiameter = discDiameter;
@@ -85,9 +85,9 @@ public class ProductTypeEntity implements Serializable {
 
 
   public ProductTypeEntity(long id, EProduct type, EDiskQuality imageQuality,
-      EDiskDiameter discDiameter, String runSpeed, String descriptions, Set<ProductEntity> products,
-      Date createDate) {
-    super();
+      EDiskDiameter discDiameter, EDiskDiameter runSpeed, String descriptions,
+      Set<ProductEntity> products, Date createDate)
+      throws ExceptionNotImageQuality, ExceptionNotInformationRunSpeedOrDisDiameter {
     this.id = id;
     this.type = type;
     this.imageQuality = imageQuality;
@@ -96,6 +96,7 @@ public class ProductTypeEntity implements Serializable {
     this.descriptions = descriptions;
     this.products = products;
     this.createDate = createDate;
+    controlItemException();
   }
 
 
@@ -173,8 +174,10 @@ public class ProductTypeEntity implements Serializable {
   }
 
 
-  public void setImageQuality(EDiskQuality imageQuality) {
+  public void setImageQuality(EDiskQuality imageQuality)
+      throws ExceptionNotImageQuality, ExceptionNotInformationRunSpeedOrDisDiameter {
     this.imageQuality = imageQuality;
+    controlItemException();
   }
 
 
@@ -183,18 +186,22 @@ public class ProductTypeEntity implements Serializable {
   }
 
 
-  public void setDiscDiameter(EDiskDiameter discDiameter) {
+  public void setDiscDiameter(EDiskDiameter discDiameter)
+      throws ExceptionNotImageQuality, ExceptionNotInformationRunSpeedOrDisDiameter {
     this.discDiameter = discDiameter;
+    controlItemException();
   }
 
 
-  public String getRunSpeed() {
+  public EDiskDiameter getRunSpeed() {
     return runSpeed;
   }
 
 
-  public void setRunSpeed(String runSpeed) {
+  public void setRunSpeed(EDiskDiameter runSpeed)
+      throws ExceptionNotImageQuality, ExceptionNotInformationRunSpeedOrDisDiameter {
     this.runSpeed = runSpeed;
+    controlItemException();
   }
 
 

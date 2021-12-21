@@ -140,8 +140,8 @@ public class NewAlbumAddedController {
     fileChooser.setTitle("Resim Seç");
     fileChooser.getExtensionFilters().addAll(
         // new FileChooser.ExtensionFilter("ALL FILES", "*.*"),
-        // new FileChooser.ExtensionFilter("ZIP", "*.png"),
-        // new FileChooser.ExtensionFilter("PDF", "*.jpg"),
+        // new FileChooser.ExtensionFilter("ZIP", "*.zip"),
+        // new FileChooser.ExtensionFilter("PDF", "*.pdf"),
         // new FileChooser.ExtensionFilter("TEXT", "*.txt"),
         new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
 
@@ -195,8 +195,12 @@ public class NewAlbumAddedController {
               album_edt_name.setText(newValue.getName());
               album_btn_delete.setDisable(false);
               album_btn_new.setDisable(false);
+
               byte[] image = newValue.getImgAlbum();
+
               if (image != null && image.length > 0) {
+                // database'den byte[]'ini InputStrema a çevirip yeni bir image nesnesi
+                // oluşturuyorum
                 InputStream myImage = new ByteArrayInputStream(image);
                 album_img_capture.setImage(new Image(myImage));
 
