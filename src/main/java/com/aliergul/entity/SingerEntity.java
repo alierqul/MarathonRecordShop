@@ -156,6 +156,7 @@ public class SingerEntity implements Serializable {
   }
 
 
+
   public Set<AlbumEntity> getAlbums() {
     return albums;
   }

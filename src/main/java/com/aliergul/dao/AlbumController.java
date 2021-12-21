@@ -67,6 +67,7 @@ public class AlbumController implements IDBCrudControlable<AlbumEntity> {
     return null;
   }
 
+
   @Override
   public List<AlbumEntity> list() {
     Session session = databaseConnectionHibernate();

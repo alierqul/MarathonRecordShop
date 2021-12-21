@@ -12,6 +12,7 @@ public interface IDBCrudControlable<T> {
 
   public boolean update(T entity);
 
+
   public List<T> list();
 
   public T find(long id);

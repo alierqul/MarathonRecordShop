@@ -16,6 +16,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -30,6 +32,7 @@ import javafx.stage.FileChooser;
 public class NewAlbumAddedController {
 
   private SingerController singerController = new SingerController();
+  private AlbumController albumController = new AlbumController();
   private ObservableList<SingerEntity> singers = FXCollections.observableArrayList();
   private ObservableList<AlbumEntity> albums = FXCollections.observableArrayList();
   private SingerEntity chooseSinger;
@@ -86,6 +89,11 @@ public class NewAlbumAddedController {
 
   @FXML
   void onNewAlbum(MouseEvent event) {
+    chooseAlbum = new AlbumEntity();
+    album_btn_save.setDisable(false);
+    album_btn_new.setDisable(true);
+    album_btn_delete.setDisable(true);
+    album_edt_name.setText("");
 
   }
 
@@ -93,11 +101,28 @@ public class NewAlbumAddedController {
   void onSaveAlbum(MouseEvent event) throws IOException {
     chooseAlbum.setName(album_edt_name.getText());
     chooseAlbum.setImgAlbum(imgPath);
+    if (chooseAlbum.getName().length() > 0) {
+      boolean result = false;
+      if (chooseAlbum.getId() > 0) {
 
-    if (chooseAlbum.getId() > 0) {
-      AlbumController controller = new AlbumController();
-      controller.update(chooseAlbum);
+        result = albumController.update(chooseAlbum);
+      } else {
+        AlbumController controller = new AlbumController();
+        result = albumController.create(chooseAlbum);
+
+      }
+      if (result) {
+        albums.setAll(albumController.list());
+        onNewAlbum(null);
+      } else {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setHeaderText("Kayıt Başarısız");
+        alert.setTitle("HATA");
+        alert.show();
+      }
+
     }
+
   }
 
   @FXML
@@ -159,7 +184,8 @@ public class NewAlbumAddedController {
             if (newValue != null) {
               chooseAlbum = newValue;
               album_edt_name.setText(newValue.getName());
-
+              album_btn_delete.setDisable(false);
+              album_btn_new.setDisable(false);
               byte[] image = newValue.getImgAlbum();
               if (image != null && image.length > 0) {
                 InputStream myImage = new ByteArrayInputStream(image);

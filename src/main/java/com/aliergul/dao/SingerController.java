@@ -74,6 +74,7 @@ public class SingerController implements IDBCrudControlable<SingerEntity> {
     return null;
   }
 
+
   @Override
   public List<SingerEntity> list() {
     Session session = databaseConnectionHibernate();
