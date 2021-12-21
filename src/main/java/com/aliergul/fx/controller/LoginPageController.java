@@ -5,18 +5,25 @@ import java.util.Optional;
 import com.aliergul.FXMain;
 import com.aliergul.dao.user.UserControllerImpl;
 import com.aliergul.entity.UserEntity;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 public class LoginPageController {
   private static final String ADMIN = "admin";
   private static final String PASSWORD = "qwerty";
   private FXMain main;
+
+  @FXML
+  private ProgressIndicator login_progressbar;
+
   // Login View items
   @FXML
   private Button btn_login;
@@ -48,7 +55,63 @@ public class LoginPageController {
   // Button On Click Listener Progress
 
   @FXML
-  void onClickBtnLogin(MouseEvent event) throws IOException {
+  void onClickBtnLogin(MouseEvent event) {
+    changedButtonAndProgresbar(true);
+    PauseTransition pt = new PauseTransition(Duration.seconds(3));
+    pt.setOnFinished(event1 -> {
+      try {
+        checkLogin();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
+    pt.play();
+    /*****************/
+
+  }
+
+  @FXML
+  void onClickBtnRegister(MouseEvent event) {
+
+    changedButtonAndProgresbar(true);
+    PauseTransition pt = new PauseTransition(Duration.seconds(3));
+    pt.setOnFinished(event1 -> {
+      checkRegister();
+    });
+    pt.play();
+
+  }
+
+  private void checkRegister() {
+    boolean result = false;
+    UserControllerImpl dao = new UserControllerImpl();
+    UserEntity regUser = validationsPasswordAndEmail();
+    if (regUser != null) {
+      result = dao.onRegister(regUser);
+
+    }
+    if (result) {
+      changedButtonAndProgresbar(false);
+      Alert alert = new Alert(AlertType.INFORMATION);
+      alert.setHeaderText("Kaydınız tamamlandı. Lütfen E-posta adresinizi kontrol ediniz.");
+      alert.setTitle("Kayıt Başarılı");
+      alert.show();
+    } else {
+      changedButtonAndProgresbar(false);
+      Alert alert = new Alert(AlertType.WARNING);
+      alert.setHeaderText("Bilgilerin Tamamının doğru girdiğinizden emin olun");
+      alert.setTitle("Kayıt Başarısız");
+      alert.show();
+    }
+    changedButtonAndProgresbar(false);
+  }
+
+  public void initAdminPanel(FXMain main) {
+    this.main = main;
+
+  }
+
+  private void checkLogin() throws IOException {
     UserControllerImpl dao = new UserControllerImpl();
 
     String email = edt_user_email.getText().trim().toLowerCase();
@@ -59,6 +122,7 @@ public class LoginPageController {
       if (email.equals(ADMIN) && password.equals(PASSWORD)) {
         main.loadAdminPage();
       } else {
+        changedButtonAndProgresbar(false);
         Alert alert = new Alert(AlertType.WARNING);
         alert.setHeaderText("Email ya da Şifre Hatalı");
         alert.setTitle("Giriş Başarısız");
@@ -66,32 +130,12 @@ public class LoginPageController {
       }
 
     } else {
+      changedButtonAndProgresbar(false);
       Alert alert = new Alert(AlertType.INFORMATION);
-      alert.setHeaderText("Email ya da Şifre Doğrudur");
+      alert.setHeaderText("Başarılı Giriş");
       alert.setTitle("Giriş başarılı");
       alert.show();
     }
-  }
-
-  @FXML
-  void onClickBtnRegister(MouseEvent event) {
-    UserControllerImpl dao = new UserControllerImpl();
-    UserEntity regUser = validationsPasswordAndEmail();
-    if (regUser != null) {
-      dao.onRegister(regUser);
-
-    } else {
-      Alert alert = new Alert(AlertType.WARNING);
-      alert.setHeaderText("Bilgilerin Tamamının doğru girdiğinizden emin olun");
-      alert.setTitle("Kayıt Başarısız");
-      alert.show();
-    }
-
-
-  }
-
-  public void initAdminPanel(FXMain main) {
-    this.main = main;
 
   }
 
@@ -121,4 +165,9 @@ public class LoginPageController {
     }
   }
 
+  private void changedButtonAndProgresbar(boolean active) {
+    login_progressbar.setVisible(active);
+    btn_login.setDisable(active);
+    register_btn.setDisable(active);
+  }
 }
