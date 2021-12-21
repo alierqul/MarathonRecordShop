@@ -98,6 +98,15 @@ public class NewAlbumAddedController {
   }
 
   @FXML
+  void onBackAdminPage(MouseEvent event) {
+    try {
+      main.loadAdminPage();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
   void onSaveAlbum(MouseEvent event) throws IOException {
     chooseAlbum.setName(album_edt_name.getText());
     chooseAlbum.setImgAlbum(imgPath);
