@@ -56,7 +56,7 @@ public class ProductEntity implements Serializable {
   private long salesCount = 0;
 
   @Column(name = "album_discountRate")
-  private double discountRate = 0.0;
+  private double discountRate = 1.0;
 
   @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<OrderEntity> orders = new ArrayList<OrderEntity>();
@@ -131,6 +131,15 @@ public class ProductEntity implements Serializable {
 
   public void setId(long id) {
     this.id = id;
+  }
+
+
+  public ProductTypeEntity getTypeProduct() {
+    return typeProduct;
+  }
+
+  public void setTypeProduct(ProductTypeEntity typeProduct) {
+    this.typeProduct = typeProduct;
   }
 
   public AlbumEntity getAlbum() {

@@ -38,6 +38,9 @@ public class OrderEntity implements Serializable {
   @Column(name = "order_count")
   private long count;
 
+  @Column(name = "order_discountRate")
+  private double discountRate = 1.0;
+
   @Column(name = "order_total_pierce")
   private double sumPierce;
 
@@ -52,12 +55,25 @@ public class OrderEntity implements Serializable {
 
 
 
+  public double getDiscountRate() {
+    return discountRate;
+  }
+
+
+
+  public void setDiscountRate(double discountRate) {
+    this.discountRate = discountRate;
+  }
+
+
+
   public OrderEntity(ProductEntity product, UserEntity user, long count) {
     super();
     this.product = product;
     this.user = user;
     this.count = count;
-
+    this.discountRate = product.getDiscountRate();
+    this.sumPierce = count * (product.getPierce() * discountRate);
   }
 
 

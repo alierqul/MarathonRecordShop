@@ -148,8 +148,10 @@ public class AlbumEntity implements Serializable {
   }
 
   public void setImgAlbum(String path) throws IOException {
+    if (path != null && path.length() > 5) {
+      this.imgAlbum = Files.readAllBytes(Paths.get(path));
+    }
 
-    this.imgAlbum = Files.readAllBytes(Paths.get(path));
   }
 
   public void setImgAlbum(byte[] imgAlbum) {

@@ -103,6 +103,8 @@ public class NewAlbumAddedController {
     album_edt_name.setText("");
     album_img_capture.setImage(null);
     album_list_type.getSelectionModel().clearSelection();
+    albums.clear();
+    albums.setAll(chooseSinger.getAlbums());
   }
 
   @FXML
@@ -125,7 +127,7 @@ public class NewAlbumAddedController {
 
         result = albumController.update(chooseAlbum);
       } else {
-        AlbumController controller = new AlbumController();
+
         result = albumController.create(chooseAlbum);
 
       }
@@ -146,7 +148,7 @@ public class NewAlbumAddedController {
   private Set<CategoryEntity> getChooseCategryALL() {
     Set<CategoryEntity> result = new HashSet<>();
     for (int i = 0; i < categories.size(); i++) {
-      if (album_list_type.getSelectionModel().isSelected(0)) {
+      if (album_list_type.getSelectionModel().isSelected(i)) {
         result.add(categories.get(i));
       }
     }
@@ -166,7 +168,7 @@ public class NewAlbumAddedController {
         new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
 
 
-    File file = fileChooser.showOpenDialog(main.getScene().getWindow());
+    File file = fileChooser.showOpenDialog(FXMain.getScene().getWindow());
 
     if (file != null) {
       imgPath = file.getPath();
