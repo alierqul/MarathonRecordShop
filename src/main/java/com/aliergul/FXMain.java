@@ -30,12 +30,12 @@ public class FXMain extends Application {
 
     stage.setScene(scene);
     stage.show();
-    // loadLoginPage();
+    loadLoginPage();
     // loadAdminPage();
     // loadNewAlbum();
     // loadNewSinger();
     // loadAdminPage();
-    loadRecordType();
+    // loadRecordType();
   }
 
   public void loadAdminPage() throws IOException {

@@ -94,6 +94,7 @@ public class NewAlbumAddedController {
     album_btn_new.setDisable(true);
     album_btn_delete.setDisable(true);
     album_edt_name.setText("");
+    album_img_capture.setImage(null);
 
   }
 
@@ -203,7 +204,8 @@ public class NewAlbumAddedController {
                 // oluşturuyorum
                 InputStream myImage = new ByteArrayInputStream(image);
                 album_img_capture.setImage(new Image(myImage));
-
+              } else {
+                album_img_capture.setImage(null);
               }
             }
 
@@ -229,6 +231,7 @@ public class NewAlbumAddedController {
                   .setCellValueFactory(v -> new SimpleStringProperty(v.getValue().getName()));
               album_table_column_type.setCellValueFactory(
                   v -> new SimpleStringProperty(v.getValue().getCategories().toString()));
+              onNewAlbum(null);
             }
 
           }
