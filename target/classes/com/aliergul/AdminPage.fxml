@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.ToggleSwitch?>
 
 <!-- fx:controller="com.bilgeadam.fx.controller.AdminHomePageController" -->
 
@@ -74,9 +83,92 @@
       </MenuBar>
    </top>
    <right>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/gokhan_kirdar.jpg" />
+                     </image>
+                  </ImageView>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <GridPane minHeight="200.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="150.0" prefWidth="150.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="45.0" prefHeight="45.0" valignment="TOP" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="45.0" prefHeight="45.0" valignment="TOP" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="45.0" prefHeight="45.0" valignment="TOP" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="45.0" prefHeight="45.0" valignment="TOP" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="45.0" prefHeight="45.0" valignment="TOP" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="93.0" text="Fiyat :" textAlignment="RIGHT" />
+                              <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="93.0" text="Stok :" textAlignment="RIGHT" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="93.0" text="Satış Adedi :" textAlignment="RIGHT" GridPane.rowIndex="3" />
+                              <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="93.0" text="İndirim :" textAlignment="RIGHT" GridPane.rowIndex="1" />
+                              <TextField GridPane.columnIndex="1" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                           </children>
+                        </GridPane>
+                        <ToggleSwitch text="Satış Durumu">
+                           <padding>
+                              <Insets bottom="20.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </ToggleSwitch>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Button contentDisplay="CENTER" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #5E8A75;" text="Yeni" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets bottom="23.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button  contentDisplay="CENTER" defaultButton="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #5E8A75;" text="Kaydet" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets bottom="23.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Button  contentDisplay="CENTER" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #5E8A75;" text="Sil" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets bottom="23.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </HBox>
+                  <TableView prefHeight="257.0" prefWidth="600.0">
+                    <columns>
+                      <TableColumn prefWidth="97.0" text="Tarih" />
+                      <TableColumn prefWidth="95.0" text="Adet" />
+                        <TableColumn prefWidth="117.0" text="Adet Fiyatı" />
+                        <TableColumn prefWidth="117.0" text="iskonto" />
+                        <TableColumn prefWidth="117.0" text="Toplam Tutar" />
+                    </columns>
+                  </TableView>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding></VBox>
          </children>
       </AnchorPane>
    </right>

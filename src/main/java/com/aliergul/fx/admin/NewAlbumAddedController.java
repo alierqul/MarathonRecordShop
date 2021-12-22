@@ -5,10 +5,14 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
 import com.aliergul.FXMain;
 import com.aliergul.dao.AlbumController;
+import com.aliergul.dao.CategoriesControllerImpls;
 import com.aliergul.dao.SingerController;
 import com.aliergul.entity.AlbumEntity;
+import com.aliergul.entity.CategoryEntity;
 import com.aliergul.entity.SingerEntity;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -20,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -33,8 +38,10 @@ public class NewAlbumAddedController {
 
   private SingerController singerController = new SingerController();
   private AlbumController albumController = new AlbumController();
+  private CategoriesControllerImpls controllerCategory = new CategoriesControllerImpls();
   private ObservableList<SingerEntity> singers = FXCollections.observableArrayList();
   private ObservableList<AlbumEntity> albums = FXCollections.observableArrayList();
+  private ObservableList<CategoryEntity> categories = FXCollections.observableArrayList();
   private SingerEntity chooseSinger;
   private AlbumEntity chooseAlbum;
   private String imgPath = "";
@@ -59,7 +66,7 @@ public class NewAlbumAddedController {
   private ImageView album_img_capture;
 
   @FXML
-  private ListView<?> album_list_type;
+  private ListView<CategoryEntity> album_list_type;
 
   @FXML
   private TableColumn<SingerEntity, String> album_singer_table_colum_name;
@@ -95,7 +102,7 @@ public class NewAlbumAddedController {
     album_btn_delete.setDisable(true);
     album_edt_name.setText("");
     album_img_capture.setImage(null);
-
+    album_list_type.getSelectionModel().clearSelection();
   }
 
   @FXML
@@ -111,6 +118,7 @@ public class NewAlbumAddedController {
   void onSaveAlbum(MouseEvent event) throws IOException {
     chooseAlbum.setName(album_edt_name.getText());
     chooseAlbum.setImgAlbum(imgPath);
+    chooseAlbum.setCategories(getChooseCategryALL());
     if (chooseAlbum.getName().length() > 0) {
       boolean result = false;
       if (chooseAlbum.getId() > 0) {
@@ -133,6 +141,17 @@ public class NewAlbumAddedController {
 
     }
 
+  }
+
+  private Set<CategoryEntity> getChooseCategryALL() {
+    Set<CategoryEntity> result = new HashSet<>();
+    for (int i = 0; i < categories.size(); i++) {
+      if (album_list_type.getSelectionModel().isSelected(0)) {
+        result.add(categories.get(i));
+      }
+    }
+
+    return result;
   }
 
   @FXML
@@ -162,6 +181,10 @@ public class NewAlbumAddedController {
   public void initAdminPanel(FXMain main) {
     this.main = main;
     singers.setAll(singerController.list());
+    categories.setAll(controllerCategory.list());
+    album_list_type.setItems(categories);
+    album_list_type.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
     album_table_view.setItems(albums);
     album_singer_table_view.setItems(singers);
     album_singer_table_colum_name
@@ -193,6 +216,7 @@ public class NewAlbumAddedController {
 
             if (newValue != null) {
               chooseAlbum = newValue;
+              album_list_type.getSelectionModel().clearSelection();
               album_edt_name.setText(newValue.getName());
               album_btn_delete.setDisable(false);
               album_btn_new.setDisable(false);
@@ -207,12 +231,23 @@ public class NewAlbumAddedController {
               } else {
                 album_img_capture.setImage(null);
               }
+              checkCategoriToList(newValue);
             }
 
           }
+
+          private void checkCategoriToList(AlbumEntity newValue) {
+            for (CategoryEntity cat : newValue.getCategories()) {
+              album_list_type.getSelectionModel().select(cat);
+            }
+
+
+          }
+
         });
 
   }
+
 
   private void onSelectedSingerTable() {
 
