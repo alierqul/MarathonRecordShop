@@ -6,9 +6,10 @@ import javax.persistence.TypedQuery;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import com.aliergul.dao.user.IAlbumSorted;
 import com.aliergul.entity.AlbumEntity;
 
-public class AlbumController implements IDBCrudControlable<AlbumEntity> {
+public class AlbumController implements IDBCrudControlable<AlbumEntity>, IAlbumSorted {
 
   private static final Logger logger = LogManager.getLogger(AlbumController.class);
   private static final String TAG = "AlbumController-";
@@ -112,14 +113,7 @@ public class AlbumController implements IDBCrudControlable<AlbumEntity> {
   }
   // @Override
   // public List<AlbumEntity> listTheLastTenAlbum() {
-  // Session session = databaseConnectionHibernate();
-  //
-  // String hql = "select str from AlbumEntity as str order by str.createDate desc";
-  // TypedQuery<AlbumEntity> typedQuery = session.createQuery(hql, AlbumEntity.class);
-  // typedQuery.setMaxResults(10);
-  // ArrayList<AlbumEntity> arrayList = (ArrayList<AlbumEntity>) typedQuery.getResultList();
-  //
-  // return arrayList;
+
   // }
   //
   // @Override
@@ -171,6 +165,42 @@ public class AlbumController implements IDBCrudControlable<AlbumEntity> {
   //
   // return arrayList;
   // }
+
+  @Override
+  public List<AlbumEntity> getTheLastAddedAlbums() {
+    Session session = databaseConnectionHibernate();
+
+    String hql = "select a from AlbumEntity as a order by a.createDate desc";
+    TypedQuery<AlbumEntity> typedQuery = session.createQuery(hql, AlbumEntity.class);
+    typedQuery.setMaxResults(10);
+    ArrayList<AlbumEntity> arrayList = (ArrayList<AlbumEntity>) typedQuery.getResultList();
+
+    return arrayList;
+  }
+
+  @Override
+  public List<AlbumEntity> getFifteenOnSales() {
+    Session session = databaseConnectionHibernate();
+    String hql =
+        "SELECT a FROM AlbumEntity as a INNER JOIN a.products as p order by p.discountRate desc";
+    TypedQuery<AlbumEntity> typedQuery = session.createQuery(hql, AlbumEntity.class);
+    typedQuery.setMaxResults(15);
+    ArrayList<AlbumEntity> arrayList = (ArrayList<AlbumEntity>) typedQuery.getResultList();
+
+    return arrayList;
+  }
+
+  @Override
+  public List<AlbumEntity> getBestSellers() {
+    Session session = databaseConnectionHibernate();
+    String hql =
+        "SELECT a FROM AlbumEntity as a INNER JOIN a.products as p order by p.salesCount desc";
+    TypedQuery<AlbumEntity> typedQuery = session.createQuery(hql, AlbumEntity.class);
+    typedQuery.setMaxResults(15);
+    ArrayList<AlbumEntity> arrayList = (ArrayList<AlbumEntity>) typedQuery.getResultList();
+
+    return arrayList;
+  }
 
 
 

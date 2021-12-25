@@ -126,9 +126,9 @@ public class AlbumLineItemViewController implements Initializable {
               item_product_discount_rate.setText("% " + newValue.getDiscountRate());
               Double discounted_pierce =
                   newValue.getPierce() * ((100 - newValue.getDiscountRate()) / 100);
-              item_product_discounted_pierce.setText(String.format("%.2f", discounted_pierce));
-              item_product_pierce.setText(String.format("%.2f", newValue.getPierce()));
-
+              item_product_discounted_pierce.setText(String.format("%.2f TL", discounted_pierce));
+              item_product_pierce.setText(String.format("%.2f TL", newValue.getPierce()));
+              item_product_stock_count.setText(newValue.getStockCount() + " adt");
               ObservableList<Integer> countIntegers = FXCollections.observableArrayList();
               for (int i = 1; i <= newValue.getStockCount(); i++) {
                 countIntegers.add(i);

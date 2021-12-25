@@ -98,7 +98,7 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="170.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="En Son Eklenen 10 Albüm" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#onTheLastAddedAlbums" prefHeight="31.0" prefWidth="170.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="En Son Eklenen 10 Albüm" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -106,7 +106,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" mnemonicParsing="false" prefWidth="170.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="İndrimdeki 15 Albüm" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#onFifteenOnSales" prefWidth="170.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="İndrimdeki 15 Albüm" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -114,7 +114,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" mnemonicParsing="false" prefWidth="170.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="En Çok Satılanlar" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#onBestSellers" prefWidth="170.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="En Çok Satılanlar" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -133,7 +133,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </Label>
-                  <ListView prefHeight="200.0" prefWidth="200.0">
+                  <ListView fx:id="user_list_categories" prefHeight="200.0" prefWidth="200.0">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>

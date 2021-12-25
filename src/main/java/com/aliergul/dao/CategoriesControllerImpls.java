@@ -39,10 +39,8 @@ public class CategoriesControllerImpls implements IDBCrudControlable<CategoryEnt
   public List<CategoryEntity> list() {
     Session session = databaseConnectionHibernate();
 
-    String hql = "select c from CategoryEntity as c where c.id>=:startCount";
+    String hql = "select c from CategoryEntity as c order by c.id desc";
     TypedQuery<CategoryEntity> typedQuery = session.createQuery(hql, CategoryEntity.class);
-    typedQuery.setParameter("startCount", 1L);
-
     ArrayList<CategoryEntity> arrayList = (ArrayList<CategoryEntity>) typedQuery.getResultList();
 
     return arrayList;

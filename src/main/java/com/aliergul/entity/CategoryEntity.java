@@ -40,7 +40,6 @@ public class CategoryEntity implements Serializable {
   private Date createDate;
 
   public CategoryEntity(String category) {
-    super();
     this.category = category;
   }
 
@@ -49,7 +48,6 @@ public class CategoryEntity implements Serializable {
   }
 
   public CategoryEntity(long id, String category, Set<AlbumEntity> albums, Date createDate) {
-    super();
     this.id = id;
     this.category = category;
     this.albums = albums;
