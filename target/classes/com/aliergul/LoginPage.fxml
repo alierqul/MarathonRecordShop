@@ -23,9 +23,9 @@
 
 <BorderPane maxHeight="533.0" maxWidth="650.0" minHeight="533.0" minWidth="500.0" prefHeight="533.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aliergul.fx.controller.LoginPageController">
    <center>
-      <AnchorPane prefHeight="513.0" prefWidth="472.0" style="-fx-background-color: #EBE6E0;">
+      <AnchorPane style="-fx-background-color: #EBE6E0;">
          <children>
-            <AnchorPane layoutX="278.0" layoutY="141.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
+            <AnchorPane layoutX="278.0" layoutY="141.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
                <children>
                   <TabPane blendMode="SCREEN" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #CAC0B3;" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
@@ -198,7 +198,7 @@
       </AnchorPane>
    </center>
    <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EBE6E0;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #EBE6E0;" BorderPane.alignment="CENTER">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -209,6 +209,9 @@
                </image>
             </ImageView>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </AnchorPane>
    </left>
 </BorderPane>

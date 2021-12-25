@@ -131,17 +131,7 @@
                         </ToggleSwitch>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Button fx:id="product_btn_new" contentDisplay="CENTER" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #5E8A75;" text="Yeni" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
-                                 <VBox.margin>
-                                    <Insets bottom="23.0" />
-                                 </VBox.margin>
-                              </Button>
-                              <Button fx:id="product_btn_save" contentDisplay="CENTER" defaultButton="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #5E8A75;" text="Kaydet" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
-                                 <VBox.margin>
-                                    <Insets bottom="23.0" />
-                                 </VBox.margin>
-                              </Button>
-                              <Button fx:id="product_btn_delete" contentDisplay="CENTER" disable="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #5E8A75;" text="Sil" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                              <Button fx:id="product_btn_save" contentDisplay="CENTER" defaultButton="true" maxHeight="25.0" minHeight="25.0" mnemonicParsing="false" onMouseClicked="#onProductChangeSave" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: #5E8A75;" text="Düzenle" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
                                  <VBox.margin>
                                     <Insets bottom="23.0" />
                                  </VBox.margin>

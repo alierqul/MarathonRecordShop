@@ -33,7 +33,7 @@ public enum MyDialogHelper {
     alert.setTitle(title);
     alert.setHeaderText(header);
     alert.setContentText(footer);
-    alert.showAndWait();
+    alert.show();
 
   }
 
@@ -42,7 +42,7 @@ public enum MyDialogHelper {
     alert.setTitle(title);
     alert.setHeaderText(header);
     alert.setContentText(footer);
-    alert.showAndWait();
+    alert.show();
 
   }
 

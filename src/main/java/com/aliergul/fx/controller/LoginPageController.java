@@ -5,10 +5,9 @@ import java.util.Optional;
 import com.aliergul.FXMain;
 import com.aliergul.dao.user.UserControllerImpl;
 import com.aliergul.entity.UserEntity;
+import com.aliergul.util.MyDialogHelper;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
@@ -92,16 +91,14 @@ public class LoginPageController {
     }
     if (result) {
       changedButtonAndProgresbar(false);
-      Alert alert = new Alert(AlertType.INFORMATION);
-      alert.setHeaderText("Kaydınız tamamlandı. Lütfen E-posta adresinizi kontrol ediniz.");
-      alert.setTitle("Kayıt Başarılı");
-      alert.show();
+      MyDialogHelper.getInstance.showMessage("Kayıt Başarılı", "Teblikler. Kaydınız alındı.",
+          "Kaydınız tamamlandı. Lütfen E-posta adresinizi kontrol ediniz.");
+
     } else {
       changedButtonAndProgresbar(false);
-      Alert alert = new Alert(AlertType.WARNING);
-      alert.setHeaderText("Bilgilerin Tamamının doğru girdiğinizden emin olun");
-      alert.setTitle("Kayıt Başarısız");
-      alert.show();
+      MyDialogHelper.getInstance.showErrorMessage("Kayıt Başarısız",
+          "Bilgilerin Tamamının doğru girdiğinizden emin olun", "");
+
     }
     changedButtonAndProgresbar(false);
   }
@@ -122,19 +119,18 @@ public class LoginPageController {
       if (email.equals(ADMIN) && password.equals(PASSWORD)) {
         main.loadAdminPage();
       } else {
+        MyDialogHelper.getInstance.showErrorMessage("Giriş Başarısız", "Email ya da Şifre Hatalı",
+            "");
         changedButtonAndProgresbar(false);
-        Alert alert = new Alert(AlertType.WARNING);
-        alert.setHeaderText("Email ya da Şifre Hatalı");
-        alert.setTitle("Giriş Başarısız");
-        alert.show();
+
       }
 
     } else {
+      main.loadUserPage();
       changedButtonAndProgresbar(false);
-      Alert alert = new Alert(AlertType.INFORMATION);
-      alert.setHeaderText("Başarılı Giriş");
-      alert.setTitle("Giriş başarılı");
-      alert.show();
+      MyDialogHelper.getInstance.showMessage("Başarılı Giriş", "Giriş başarılı",
+          "Hoş Geldiniz ! " + optUser.get().getName());
+
     }
 
   }

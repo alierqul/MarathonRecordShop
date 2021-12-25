@@ -5,12 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import org.controlsfx.control.ToggleSwitch;
 import com.aliergul.FXMain;
+import com.aliergul.dao.ProductControllerImpl;
 import com.aliergul.dao.SingerController;
 import com.aliergul.entity.AlbumEntity;
 import com.aliergul.entity.OrderEntity;
 import com.aliergul.entity.ProductEntity;
 import com.aliergul.entity.SingerEntity;
 import com.aliergul.util.EStatus;
+import com.aliergul.util.MyDialogHelper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,10 +26,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 public class AdminHomePageController {
 
   private SingerController singerController = new SingerController();
+  private ProductControllerImpl controllerProduct = new ProductControllerImpl();
   private ProductEntity chooseProduct = null;
   private AlbumEntity chooseAlbum = null;
   private FXMain main;
@@ -54,11 +58,6 @@ public class AdminHomePageController {
   private TableView<SingerEntity> admin_table_singer;
 
   /* Product Table information */
-  @FXML
-  private Button product_btn_delete;
-
-  @FXML
-  private Button product_btn_new;
 
   @FXML
   private Button product_btn_save;
@@ -198,6 +197,30 @@ public class AdminHomePageController {
                 v -> new SimpleStringProperty(v.getValue().getSumPierce() + ""));
           }
         });
+  }
+
+  @FXML
+  void onProductChangeSave(MouseEvent event) {
+    if (chooseProduct != null) {
+      try {
+        Long stock = Long.valueOf(product_edt_stock.getText());
+        double discount = Float.valueOf(product_edt_discount.getText());
+        double pierce = Double.valueOf(product_edt_price.getText());
+        chooseProduct.setStockCount(stock);
+        chooseProduct.setDiscountRate(discount);
+        chooseProduct.setPierce(pierce);
+        chooseProduct
+            .setStatus(product_switch_status.isSelected() ? EStatus.ACTIVE : EStatus.PASIF);
+        controllerProduct.update(chooseProduct);
+      } catch (Exception e) {
+        MyDialogHelper.getInstance.showErrorMessage("Hatalı Bilgi",
+            "Girilen Değerleri Kontrol ediniz", e.getMessage());
+      }
+
+
+
+    }
+
   }
 
   @FXML

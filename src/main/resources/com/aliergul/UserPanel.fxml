@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aliergul.fx.user.UserPageController">
+   <center>
+      <AnchorPane prefHeight="900.0" prefWidth="800.0">
+         <children>
+            <VBox alignment="CENTER_RIGHT" prefHeight="800.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ListView fx:id="user_list_albums" nodeOrientation="LEFT_TO_RIGHT" prefWidth="800.0" />
+                  <Label alignment="CENTER" prefWidth="150.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Kullanıcı Sepeti" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Comic Sans MS" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TableView prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="309.0" text="Album Adı" />
+                      <TableColumn prefWidth="144.0" text="Kaç Tane" />
+                        <TableColumn prefWidth="100.0" text="İskonto" />
+                        <TableColumn prefWidth="120.0" text="Tutar" />
+                    </columns>
+                  </TableView>
+                  <Label alignment="CENTER" maxHeight="-Infinity" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Toplam Adet = 5 Adet" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Comic Sans MS" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" maxHeight="-Infinity" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Toplam Tutar = 100 TL" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Comic Sans MS" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Sepeti Onayla" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Hesabım">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Profil" />
+                  <MenuItem mnemonicParsing="false" text="Çıkış Yap" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Sepet" />
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <right>
+      <AnchorPane prefHeight="800.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="170.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="En Son Eklenen 10 Albüm" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" mnemonicParsing="false" prefWidth="170.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="İndrimdeki 15 Albüm" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" mnemonicParsing="false" prefWidth="170.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="En Çok Satılanlar" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Button>
+                  <Label alignment="CENTER" maxHeight="-Infinity" prefWidth="170.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Tür" textAlignment="CENTER" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Comic Sans MS" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <ListView prefHeight="200.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </ListView>
+                  <Label alignment="CENTER" maxHeight="-Infinity" prefWidth="170.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Sanatçı" textAlignment="CENTER" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Comic Sans MS" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <ListView prefHeight="200.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </ListView>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

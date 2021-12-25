@@ -22,6 +22,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import com.aliergul.util.EStatus;
+import com.aliergul.util.exception.ExceptionDiscountError;
 
 @Entity
 @Table(name = "tbl_product")
@@ -56,7 +57,7 @@ public class ProductEntity implements Serializable {
   private long salesCount = 0;
 
   @Column(name = "album_discountRate")
-  private double discountRate = 1.0;
+  private double discountRate = 0.0;
 
   @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<OrderEntity> orders = new ArrayList<OrderEntity>();
@@ -90,14 +91,13 @@ public class ProductEntity implements Serializable {
     this.typeProduct = type;
     this.pierce = pierce;
     this.stockCount = stockCount;
+
+
   }
 
   @Override
   public String toString() {
-    return "ProductEntity [id=" + id + ", album=" + album.getName() + ", type="
-        + typeProduct.getType() + ", status=" + status + ", pierce=" + pierce + ", stockCount="
-        + stockCount + ", salesCount=" + salesCount + ", discountRate=" + discountRate
-        + ", createDate=" + createDate + "]";
+    return typeProduct.getType().name() + " " + typeProduct.getDescriptions();
   }
 
 
@@ -194,8 +194,13 @@ public class ProductEntity implements Serializable {
     return discountRate;
   }
 
-  public void setDiscountRate(double discountRate) {
-    this.discountRate = discountRate;
+  public void setDiscountRate(double discountRate) throws ExceptionDiscountError {
+    if (discountRate < 0 || discountRate > 100) {
+      throw new ExceptionDiscountError("İndirim oranı 0-100 arasında olmalı");
+    } else {
+      this.discountRate = discountRate;
+    }
+
   }
 
   public List<OrderEntity> getOrders() {

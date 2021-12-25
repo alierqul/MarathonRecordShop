@@ -7,13 +7,17 @@ import com.aliergul.fx.admin.NewAlbumAddedController;
 import com.aliergul.fx.admin.NewRecordTypeController;
 import com.aliergul.fx.admin.NewSingerAddedController;
 import com.aliergul.fx.controller.LoginPageController;
+import com.aliergul.fx.user.UserPageController;
 import com.aliergul.util.HibernateUtils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+// --module-path "D:\Eclipse2021\library\openjfx-17.0.1_windows-x64_bin-sdk\javafx-sdk-17.0.1\lib"
+// --add-modules javafx.controls,javafx.fxml
 public class FXMain extends Application {
 
   private static Scene scene;
@@ -34,7 +38,8 @@ public class FXMain extends Application {
     stage.setScene(scene);
     stage.show();
     // loadLoginPage();
-    loadAdminPage();
+    loadUserPage();
+    // loadAdminPage();
     // loadNewAlbum();
     // loadNewSinger();
     // loadAdminPage();
@@ -48,6 +53,17 @@ public class FXMain extends Application {
     scene.setRoot(fxmlLoader.load());
     AdminHomePageController controller = fxmlLoader.getController();
     controller.initAdminPanel(this);
+
+
+  }
+
+  public void loadUserPage() throws IOException {
+    FXMLLoader fxmlLoader = new FXMLLoader(FXMain.class.getResource("UserPanel.fxml"));
+    FXMain.stage.setWidth(1100);
+    FXMain.stage.setHeight(950);
+    scene.setRoot(fxmlLoader.load());
+    UserPageController controller = fxmlLoader.getController();
+    controller.initUserPageLoad(this);
 
 
   }
@@ -102,8 +118,10 @@ public class FXMain extends Application {
 
   public void loadLoginPage() throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(FXMain.class.getResource("LoginPage.fxml"));
+    FXMain.stage.getIcons().add(new Image(FXMain.class.getResourceAsStream("img/logo.png")));
+    FXMain.stage.setTitle("Record Store");
     FXMain.stage.setWidth(800);
-    FXMain.stage.setHeight(800);
+    FXMain.stage.setHeight(600);
     scene.setRoot(fxmlLoader.load());
     LoginPageController controller = fxmlLoader.getController();
     controller.initAdminPanel(this);

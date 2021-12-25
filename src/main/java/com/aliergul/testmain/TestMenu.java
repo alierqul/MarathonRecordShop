@@ -23,6 +23,7 @@ import com.aliergul.entity.UserEntity;
 import com.aliergul.util.EDiskQuality;
 import com.aliergul.util.EProduct;
 import com.aliergul.util.MenuBuilder;
+import com.aliergul.util.exception.ExceptionDiscountError;
 import com.aliergul.util.exception.ExceptionNotImageQuality;
 import com.aliergul.util.exception.ExceptionNotInformationRunSpeedOrDisDiameter;
 
@@ -46,11 +47,15 @@ public enum TestMenu {
     mainTest2().show();
     test_02_addNewAlbum();
     mainTest3().show();
-    test_03_addOrderBy();
+    try {
+      test_03_addOrderBy();
+    } catch (ExceptionDiscountError e) {
+      e.printStackTrace();
+    }
 
   }
 
-  void test_03_addOrderBy() {
+  void test_03_addOrderBy() throws ExceptionDiscountError {
 
     // AlbumEntity album, UserEntity user, long count
     List<ProductEntity> listAlbum = productControllerImpl.list();
@@ -172,9 +177,9 @@ public enum TestMenu {
     sena_sener = listSinger.get(0);// database den id'leri ile çekiyoruz
     gokhan_kirdar = listSinger.get(1);// database den id'leri ile çekiyoruz
     tarkan = listSinger.get(2);// database den id'leri ile çekiyoruz
-    String path1 = "./src/main/resources/com/aliergul/img/gokhan_kirdar.jpg";
-    String path2 = "./src/main/resources/com/aliergul/img/senasener.png";
-    String path3 = "./src/main/resources/com/aliergul/img/tarkan.jpg";
+    String gokhan_path = "./src/main/resources/com/aliergul/img/gokhan_kirdar.jpg";
+    String sena_path = "./src/main/resources/com/aliergul/img/senasener.png";
+    String tarkan_path = "./src/main/resources/com/aliergul/img/tarkan.jpg";
 
 
     /* ********************************************** */
@@ -184,11 +189,16 @@ public enum TestMenu {
     AlbumEntity serser_mayin = null;
     try {
       sevmemeliyiz = new AlbumEntity("Sevmemeliz", "", sena_sener, pop);
+      sevmemeliyiz.setImgAlbum(sena_path);
       insanGelirInsanGecer =
           new AlbumEntity("insan gelir insan geçer", "", sena_sener, pop_slow_caz);
+      insanGelirInsanGecer.setImgAlbum(sena_path);
       yolla = new AlbumEntity("yolla", "", tarkan, pop_slow_caz);
+      yolla.setImgAlbum(tarkan_path);
       dudududu = new AlbumEntity("dudu dudu", "", tarkan, pop_slow_caz);
+      dudududu.setImgAlbum(tarkan_path);
       serser_mayin = new AlbumEntity("Serseri Mayın", "", gokhan_kirdar, pop_slow);
+      serser_mayin.setImgAlbum(gokhan_path);
 
       albumController.create(insanGelirInsanGecer);
       albumController.create(sevmemeliyiz);

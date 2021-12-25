@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
+import com.aliergul.util.exception.ExceptionDiscountError;
 
 @Entity
 @Table(name = "tbl_orders")
@@ -39,7 +40,7 @@ public class OrderEntity implements Serializable {
   private long count;
 
   @Column(name = "order_discountRate")
-  private double discountRate = 1.0;
+  private double discountRate = 0.0;
 
   @Column(name = "order_total_pierce")
   private double sumPierce;
@@ -67,13 +68,18 @@ public class OrderEntity implements Serializable {
 
 
 
-  public OrderEntity(ProductEntity product, UserEntity user, long count) {
+  public OrderEntity(ProductEntity product, UserEntity user, long count)
+      throws ExceptionDiscountError {
     super();
+
     this.product = product;
     this.user = user;
     this.count = count;
     this.discountRate = product.getDiscountRate();
-    this.sumPierce = count * (product.getPierce() * discountRate);
+    if (discountRate < 0 || discountRate > 100) {
+      throw new ExceptionDiscountError("İndirim oranı 0-100 arasında olmalı");
+    }
+    this.sumPierce = count * product.getPierce() * ((100 - discountRate) / 100);
   }
 
 
