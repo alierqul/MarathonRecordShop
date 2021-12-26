@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import com.aliergul.entity.AlbumEntity;
 import com.aliergul.entity.OrderEntity;
 import com.aliergul.entity.ProductEntity;
+import com.aliergul.util.EStatus;
 import com.aliergul.util.MyDialogHelper;
 import com.aliergul.util.exception.ExceptionDiscountError;
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -64,6 +66,9 @@ public class AlbumLineItemViewController implements Initializable {
   private Label item_product_stock_count;
   @FXML
   private Label item_product_type;
+
+  @FXML
+  private Button item_btn_add_to_cart;
 
 
   public AlbumLineItemViewController() {
@@ -134,6 +139,14 @@ public class AlbumLineItemViewController implements Initializable {
     ObservableList<Integer> countIntegers = FXCollections.observableArrayList();
     for (int i = 1; i <= product.getStockCount(); i++) {
       countIntegers.add(i);
+    }
+
+    if (product.getStatus() == EStatus.ACTIVE) {
+      item_combo_product_count.setDisable(false);
+      item_btn_add_to_cart.setDisable(false);
+    } else {
+      item_combo_product_count.setDisable(true);
+      item_btn_add_to_cart.setDisable(true);
     }
     item_combo_product_count.setItems(countIntegers);
 

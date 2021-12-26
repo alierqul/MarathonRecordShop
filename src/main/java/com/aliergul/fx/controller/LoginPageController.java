@@ -126,7 +126,7 @@ public class LoginPageController {
       }
 
     } else {
-      main.loadUserPage();
+      main.loadUserPage(optUser.get());
       changedButtonAndProgresbar(false);
       MyDialogHelper.getInstance.showMessage("Başarılı Giriş", "Giriş başarılı",
           "Hoş Geldiniz ! " + optUser.get().getName());

@@ -64,7 +64,7 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Sepeti Onayla" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+                  <Button fx:id="user_btn_ChecktoCart" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" maxHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#onClickChecktoCart" prefWidth="150.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Sepeti Onayla" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
                      <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" />
                      </VBox.margin>

@@ -2,6 +2,7 @@ package com.aliergul;
 
 
 import java.io.IOException;
+import com.aliergul.entity.UserEntity;
 import com.aliergul.fx.admin.AdminHomePageController;
 import com.aliergul.fx.admin.NewAlbumAddedController;
 import com.aliergul.fx.admin.NewRecordTypeController;
@@ -37,8 +38,8 @@ public class FXMain extends Application {
     FXMain.stage = stage;
     stage.setScene(scene);
     stage.show();
-    // loadLoginPage();
-    loadUserPage();
+    loadLoginPage();
+    // loadUserPage();
     // loadAdminPage();
     // loadNewAlbum();
     // loadNewSinger();
@@ -57,13 +58,13 @@ public class FXMain extends Application {
 
   }
 
-  public void loadUserPage() throws IOException {
+  public void loadUserPage(UserEntity chooseUser) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(FXMain.class.getResource("UserPanel.fxml"));
     FXMain.stage.setWidth(1100);
     FXMain.stage.setHeight(950);
     scene.setRoot(fxmlLoader.load());
     UserPageController controller = fxmlLoader.getController();
-    controller.initUserPageLoad(this);
+    controller.initUserPageLoad(this, chooseUser);
 
 
   }

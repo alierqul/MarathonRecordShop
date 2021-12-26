@@ -89,7 +89,7 @@ public class ProductControllerImpl
       ProductEntity findEntity = find(product.getId());
       if (findEntity != null) {
 
-        if (product.getStockCount() < 2) {
+        if (product.getStockCount() <= 2) {
           product.setStatus(EStatus.PASIF);
         }
         findEntity.setAlbum(product.getAlbum());

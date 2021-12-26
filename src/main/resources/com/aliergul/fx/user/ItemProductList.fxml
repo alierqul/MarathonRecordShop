@@ -101,7 +101,7 @@
                </children>
             </VBox>
             <ComboBox fx:id="item_combo_product_count" maxWidth="108.0" prefHeight="25.0" prefWidth="108.0" promptText="Adet Seçiniz" />
-            <Button mnemonicParsing="false" onMouseClicked="#onClickAddCart" style="-fx-background-radius: 20; -fx-background-color: #5E8A75;" text="Sepete At" textFill="WHITE">
+            <Button fx:id="item_btn_add_to_cart" mnemonicParsing="false" onMouseClicked="#onClickAddCart" style="-fx-background-radius: 20; -fx-background-color: #5E8A75;" text="Sepete At" textFill="WHITE">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>

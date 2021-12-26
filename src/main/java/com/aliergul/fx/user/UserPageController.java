@@ -6,16 +6,19 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import com.aliergul.FXMain;
 import com.aliergul.dao.CategoriesControllerImpls;
+import com.aliergul.dao.OrderControlerImpl;
 import com.aliergul.dao.ProductControllerImpl;
 import com.aliergul.entity.CategoryEntity;
 import com.aliergul.entity.OrderEntity;
 import com.aliergul.entity.ProductEntity;
+import com.aliergul.entity.UserEntity;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -33,7 +36,13 @@ public class UserPageController implements IOrderToCart {
   private ObservableList<OrderEntity> orders = FXCollections.observableArrayList();
   private ProductControllerImpl controllerProduct = new ProductControllerImpl();
   private CategoriesControllerImpls controllerCategory = new CategoriesControllerImpls();
+  private OrderControlerImpl controllerOrder = new OrderControlerImpl();
   private FXMain main;
+  private UserEntity chooseUser;
+
+
+  @FXML
+  private Button user_btn_ChecktoCart;
 
   @FXML
   private Label user_lbl_sum_count;
@@ -66,12 +75,13 @@ public class UserPageController implements IOrderToCart {
   @FXML
   private TableColumn<OrderEntity, String> user_table_order_sum_pierce;
 
-  public void initUserPageLoad(FXMain main) {
+  public void initUserPageLoad(FXMain main, UserEntity chooseUser) {
     this.main = main;
-
+    this.chooseUser = chooseUser;
     productDetailController();
     categoryDeatilController();
     orderDetailController();
+    user_btn_ChecktoCart.setDisable(true);
 
   }
 
@@ -159,6 +169,26 @@ public class UserPageController implements IOrderToCart {
     products.setAll(controllerProduct.getTheLastAddedAlbums());
   }
 
+  @FXML
+  void onClickChecktoCart(MouseEvent event) {
+    if (orders.size() > 0) {
+      if (!user_btn_ChecktoCart.isDisable()) {
+        user_btn_ChecktoCart.setDisable(true);
+      }
+      for (OrderEntity order : orders) {
+        order.setUser(chooseUser);
+        controllerOrder.create(order);
+      }
+      products.removeAll();
+      orders.removeAll();
+      user_table_order.getItems().clear();
+      products.addAll(controllerProduct.list());
+
+    }
+
+
+  }
+
   private long sum_count = 0;
   private double sum_pierce = 0;
 
@@ -178,7 +208,9 @@ public class UserPageController implements IOrderToCart {
     sum_pierce += order.getDiscounted_pierce() * order.getCount();
     user_lbl_sum_count.setText("Toplam Adet= " + sum_count + " adt");
     user_lbl_sum_pierce.setText(String.format("Toplam Tutar= %.02f TL", sum_pierce));
-
+    if (orders.size() > 0 && user_btn_ChecktoCart.isDisable()) {
+      user_btn_ChecktoCart.setDisable(false);
+    }
   }
 
 }
