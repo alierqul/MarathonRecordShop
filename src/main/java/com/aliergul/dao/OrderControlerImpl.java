@@ -104,7 +104,7 @@ public class OrderControlerImpl implements IDBCrudControlable<OrderEntity> {
 
         findEntity.setCount(entity.getCount());
         findEntity.setProduct(entity.getProduct());
-        findEntity.setSumPierce(entity.getSumPierce());
+
         findEntity.setUser(entity.getUser());
 
         Session session = databaseConnectionHibernate();

@@ -10,7 +10,8 @@ import com.aliergul.dao.user.UserControllerImpl;
 import com.aliergul.entity.ProductEntity;
 import com.aliergul.util.EStatus;
 
-public class ProductControllerImpl implements IDBCrudControlable<ProductEntity> {
+public class ProductControllerImpl
+    implements IDBCrudControlable<ProductEntity>, IAlbumSorted<ProductEntity> {
 
   private static final Logger logger = LogManager.getLogger(UserControllerImpl.class);
   private static final String TAG = "ProductControllerImpl=";
@@ -117,4 +118,56 @@ public class ProductControllerImpl implements IDBCrudControlable<ProductEntity> 
     return false;
   }
 
+  @Override
+  public List<ProductEntity> getTheLastAddedAlbums() {
+    Session session = databaseConnectionHibernate();
+
+    String hql = "select p from ProductEntity as p order by p.createDate desc";
+    TypedQuery<ProductEntity> typedQuery = session.createQuery(hql, ProductEntity.class);
+    typedQuery.setMaxResults(10);
+    ArrayList<ProductEntity> arrayList = (ArrayList<ProductEntity>) typedQuery.getResultList();
+
+    return arrayList;
+  }
+
+  @Override
+  public List<ProductEntity> getFifteenOnSales() {
+    Session session = databaseConnectionHibernate();
+
+    String hql = "select p from ProductEntity as p order by p.discountRate desc";
+    TypedQuery<ProductEntity> typedQuery = session.createQuery(hql, ProductEntity.class);
+    typedQuery.setMaxResults(15);
+    ArrayList<ProductEntity> arrayList = (ArrayList<ProductEntity>) typedQuery.getResultList();
+
+    return arrayList;
+  }
+
+  @Override
+  public List<ProductEntity> getBestSellers() {
+    Session session = databaseConnectionHibernate();
+
+    String hql = "select p from ProductEntity as p order by p.salesCount desc";
+    TypedQuery<ProductEntity> typedQuery = session.createQuery(hql, ProductEntity.class);
+
+    ArrayList<ProductEntity> arrayList = (ArrayList<ProductEntity>) typedQuery.getResultList();
+
+    return arrayList;
+  }
+
+  @Override
+  public List<ProductEntity> getProductByCategories(String categories) {
+    ArrayList<ProductEntity> arrayList = new ArrayList<ProductEntity>();
+    if (categories.length() > 0) {
+      logger.info(TAG + "/ getProductByCategories / find \n" + categories);
+      Session session = databaseConnectionHibernate();
+      String hql =
+          "SELECT p FROM ProductEntity AS p INNER JOIN p.album AS a INNER JOIN a.categories AS c WHERE (c.category IN (:search))";
+      TypedQuery<ProductEntity> typedQuery = session.createQuery(hql, ProductEntity.class);
+      typedQuery.setParameter("search", categories);
+      arrayList = (ArrayList<ProductEntity>) typedQuery.getResultList();
+    }
+    return arrayList;
+  }
+
 }
+

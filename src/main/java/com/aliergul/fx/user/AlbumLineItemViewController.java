@@ -10,9 +10,10 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import com.aliergul.entity.AlbumEntity;
+import com.aliergul.entity.OrderEntity;
 import com.aliergul.entity.ProductEntity;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import com.aliergul.util.MyDialogHelper;
+import com.aliergul.util.exception.ExceptionDiscountError;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +22,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -32,6 +32,8 @@ public class AlbumLineItemViewController implements Initializable {
   private static final String TAG = "AlbumLineItemViewController";
   private Logger logger = LogManager.getLogger(AlbumLineItemViewController.class);
   private AnchorPane anchorPane;
+  private IOrderToCart orderToCart;
+  private ProductEntity productEntity;
 
   @FXML
   private ImageView item_img_album;
@@ -48,8 +50,6 @@ public class AlbumLineItemViewController implements Initializable {
   @FXML
   private Label item_lbl_album_name;
 
-  @FXML
-  private ListView<ProductEntity> item_llist_product;
 
   @FXML
   private Label item_product_discount_rate;
@@ -62,7 +62,8 @@ public class AlbumLineItemViewController implements Initializable {
 
   @FXML
   private Label item_product_stock_count;
-
+  @FXML
+  private Label item_product_type;
 
 
   public AlbumLineItemViewController() {
@@ -87,6 +88,18 @@ public class AlbumLineItemViewController implements Initializable {
   @FXML
   void onClickAddCart(MouseEvent event) {
 
+    try {
+      if (item_combo_product_count.getValue() != null) {
+        orderToCart.addToCartinOrderList(
+
+            new OrderEntity(productEntity, null, item_combo_product_count.getValue()));
+      } else {
+        MyDialogHelper.getInstance.showErrorMessage("Hata", "Önce Adet Seçmelisiniz.", "");
+      }
+
+    } catch (ExceptionDiscountError e) {
+      e.printStackTrace();
+    }
   }
 
   public Node getView() {
@@ -94,9 +107,12 @@ public class AlbumLineItemViewController implements Initializable {
     return anchorPane;
   }
 
-  public void setTicket(AlbumEntity item) {
-    ObservableList<ProductEntity> products = FXCollections.observableArrayList();
-    byte[] image = item.getImgAlbum();
+  public void setTicket(ProductEntity product, UserPageController context) {
+    AlbumEntity album = product.getAlbum();
+    this.productEntity = product;
+
+    this.orderToCart = context;
+    byte[] image = album.getImgAlbum();
     if (image != null) {
       InputStream myImage = new ByteArrayInputStream(image);
       item_img_album.setImage(new Image(myImage));
@@ -104,42 +120,22 @@ public class AlbumLineItemViewController implements Initializable {
       item_img_album.setImage(null);
     }
 
-    item_lbl_album_name.setText(item.getName());
+    item_lbl_album_name.setText(album.getName());
     item_lbl_album_SingerName
-        .setText(item.getSinger().getName() + " " + item.getSinger().getSurname());
+        .setText(album.getSinger().getName() + " " + album.getSinger().getSurname());
 
-    item_lbl_album_categories.setText(item.getCategories().toString().replace(",", "#"));
-
-    products.setAll(item.getProducts());
-    item_llist_product.setItems(products);
-    if (products.size() > 0 && item_llist_product.getSelectionModel().getSelectedIndex() < 0) {
-      item_llist_product.getSelectionModel().select(0);
+    item_lbl_album_categories.setText(album.getCategories().toString().replace(",", "#"));
+    item_product_type.setText(product.getType().toString());
+    item_product_discount_rate.setText("% " + product.getDiscountRate());
+    Double discounted_pierce = product.getPierce() * ((100 - product.getDiscountRate()) / 100);
+    item_product_discounted_pierce.setText(String.format("%.2f TL", discounted_pierce));
+    item_product_pierce.setText(String.format("%.2f TL", product.getPierce()));
+    item_product_stock_count.setText(product.getStockCount() + " adt");
+    ObservableList<Integer> countIntegers = FXCollections.observableArrayList();
+    for (int i = 1; i <= product.getStockCount(); i++) {
+      countIntegers.add(i);
     }
-
-    item_llist_product.getSelectionModel().selectedItemProperty()
-        .addListener(new ChangeListener<ProductEntity>() {
-
-          @Override
-          public void changed(ObservableValue<? extends ProductEntity> observable,
-              ProductEntity oldValue, ProductEntity newValue) {
-            if (newValue != null) {
-              item_product_discount_rate.setText("% " + newValue.getDiscountRate());
-              Double discounted_pierce =
-                  newValue.getPierce() * ((100 - newValue.getDiscountRate()) / 100);
-              item_product_discounted_pierce.setText(String.format("%.2f TL", discounted_pierce));
-              item_product_pierce.setText(String.format("%.2f TL", newValue.getPierce()));
-              item_product_stock_count.setText(newValue.getStockCount() + " adt");
-              ObservableList<Integer> countIntegers = FXCollections.observableArrayList();
-              for (int i = 1; i <= newValue.getStockCount(); i++) {
-                countIntegers.add(i);
-              }
-              item_combo_product_count.setItems(countIntegers);
-            }
-
-
-
-          }
-        });
+    item_combo_product_count.setItems(countIntegers);
 
   }
 

@@ -118,9 +118,7 @@ public class ProductTypeEntity implements Serializable {
 
   @Override
   public String toString() {
-    return "ProductTypeEntity [id=" + id + ", type=" + type + ", imageQuality=" + imageQuality
-        + ", discDiameter=" + discDiameter + ", runSpeed=" + runSpeed + ", descriptions="
-        + descriptions + ", createDate=" + createDate + "]";
+    return type + "- " + descriptions;
   }
 
 

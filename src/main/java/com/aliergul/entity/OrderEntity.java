@@ -79,7 +79,7 @@ public class OrderEntity implements Serializable {
     if (discountRate < 0 || discountRate > 100) {
       throw new ExceptionDiscountError("İndirim oranı 0-100 arasında olmalı");
     }
-    this.sumPierce = count * product.getPierce() * ((100 - discountRate) / 100);
+    this.sumPierce = count * getDiscounted_pierce();
   }
 
 
@@ -93,6 +93,15 @@ public class OrderEntity implements Serializable {
     this.count = count;
     this.sumPierce = sumPierce;
     this.createDate = createDate;
+  }
+
+
+
+  @Override
+  public String toString() {
+    return "OrderEntity [id=" + id + ", product=" + product.getAlbum() + ", count=" + count
+        + ", discountRate=" + discountRate + ", sumPierce=" + sumPierce + ", createDate="
+        + createDate + "]";
   }
 
 
@@ -113,10 +122,7 @@ public class OrderEntity implements Serializable {
     if (getClass() != obj.getClass())
       return false;
     OrderEntity other = (OrderEntity) obj;
-    return count == other.count && Objects.equals(createDate, other.createDate) && id == other.id
-        && Objects.equals(product, other.product)
-        && Double.doubleToLongBits(sumPierce) == Double.doubleToLongBits(other.sumPierce)
-        && Objects.equals(user, other.user);
+    return Objects.equals(product, other.product);
   }
 
 
@@ -157,15 +163,19 @@ public class OrderEntity implements Serializable {
 
   public void setCount(long count) {
     this.count = count;
+    this.sumPierce = count * getDiscounted_pierce();
   }
 
   public double getSumPierce() {
+
     return sumPierce;
   }
 
-  public void setSumPierce(double sumPierce) {
-    this.sumPierce = sumPierce;
+  public double getDiscounted_pierce() {
+    return product.getPierce() * ((100 - product.getDiscountRate()) / 100);
   }
+
+
 
   public Date getCreateDate() {
     return createDate;

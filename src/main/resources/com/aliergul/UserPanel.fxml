@@ -20,7 +20,7 @@
          <children>
             <VBox alignment="CENTER_RIGHT" prefHeight="800.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ListView fx:id="user_list_albums" nodeOrientation="LEFT_TO_RIGHT" prefWidth="800.0" />
+                  <ListView fx:id="user_list_products" nodeOrientation="LEFT_TO_RIGHT" prefWidth="800.0" />
                   <Label alignment="CENTER" prefWidth="150.0" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Kullanıcı Sepeti" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Comic Sans MS" size="12.0" />
@@ -32,15 +32,17 @@
                         <Insets bottom="10.0" left="10.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="user_table_order" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="309.0" text="Album Adı" />
-                      <TableColumn prefWidth="144.0" text="Kaç Tane" />
-                        <TableColumn prefWidth="100.0" text="İskonto" />
-                        <TableColumn prefWidth="120.0" text="Tutar" />
+                      <TableColumn fx:id="user_table_order_column_allbum_name" prefWidth="309.0" text="Album Adı" />
+                      <TableColumn fx:id="user_table_order_column_count" prefWidth="144.0" text="Kaç Tane" />
+                        <TableColumn fx:id="user_table_order_column_discount_rate" prefWidth="100.0" text="İskonto" />
+                        <TableColumn fx:id="user_table_order_pierce" prefWidth="120.0" text="fiyat" />
+                        <TableColumn fx:id="user_table_column_discounted_pierce" prefWidth="120.0" text="İndirimli Fiyatı" />
+                        <TableColumn fx:id="user_table_order_sum_pierce" prefWidth="120.0" text="Tutar" />
                     </columns>
                   </TableView>
-                  <Label alignment="CENTER" maxHeight="-Infinity" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Toplam Adet = 5 Adet" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="user_lbl_sum_count" alignment="CENTER" maxHeight="-Infinity" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Toplam Adet = 5 Adet" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Comic Sans MS" size="12.0" />
                      </font>
@@ -51,7 +53,7 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Label alignment="CENTER" maxHeight="-Infinity" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Toplam Tutar = 100 TL" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="user_lbl_sum_pierce" alignment="CENTER" maxHeight="-Infinity" style="-fx-background-color: #5E8A75; -fx-background-radius: 25;" text="Toplam Tutar = 100 TL" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Comic Sans MS" size="12.0" />
                      </font>
