@@ -2,6 +2,8 @@ package com.aliergul.fx.user;
 
 
 
+import java.io.File;
+import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import com.aliergul.FXMain;
@@ -12,6 +14,7 @@ import com.aliergul.entity.CategoryEntity;
 import com.aliergul.entity.OrderEntity;
 import com.aliergul.entity.ProductEntity;
 import com.aliergul.entity.UserEntity;
+import com.aliergul.util.ITextPDFCreator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -26,6 +29,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 
 public class UserPageController implements IOrderToCart {
@@ -179,6 +183,7 @@ public class UserPageController implements IOrderToCart {
         order.setUser(chooseUser);
         controllerOrder.create(order);
       }
+      chooseSaveFile(orders);
       products.removeAll();
       orders.removeAll();
       user_table_order.getItems().clear();
@@ -186,6 +191,28 @@ public class UserPageController implements IOrderToCart {
 
     }
 
+
+  }
+
+  private void chooseSaveFile(List<OrderEntity> orders) {
+
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Faturayı Kaydet");
+    fileChooser.getExtensionFilters().addAll(
+        // new FileChooser.ExtensionFilter("ALL FILES", "*.*"),
+        // new FileChooser.ExtensionFilter("ZIP", "*.zip"),
+        new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+    // new FileChooser.ExtensionFilter("TEXT", "*.txt"),
+    // new FileChooser.ExtensionFilter("IMAGE FILES", "*.jpg", "*.png", "*.gif"));
+    File file = fileChooser.showSaveDialog(FXMain.getScene().getWindow());
+    if (file != null) {
+      ITextPDFCreator creator = new ITextPDFCreator(orders, file.getPath());
+      try {
+        creator.createITextTablePDF();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
 
   }
 
